@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainCare - Saúde Mental Corporativa B2B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body.light-mode {
+            background-color: #FEFDFB;
+            color: #1f2937;
+        }
+        
+        body.dark-mode {
+            background-color: #1a1a2e;
+            color: #f3f4f6;
+        }
+        
+        body.dark-mode section {
+            background-color: #16213e !important;
+        }
+        
+        body.dark-mode .section-title {
+            color: #f3f4f6;
+        }
+        
+        body.dark-mode h2, body.dark-mode h3, body.dark-mode h4 {
+            color: #f3f4f6;
+        }
+        
+        body.dark-mode .text-gray-600 {
+            color: #d1d5db !important;
+        }
+        
+        body.dark-mode .text-gray-900 {
+            color: #f3f4f6 !important;
+        }
+        
+        body.dark-mode .btn-primary:hover {
+            background-color: #059669 !important;
+        }
+        
+        body.dark-mode header {
+            background-color: #0f172a !important;
+            color: #f3f4f6;
+        }
+        
+        body.dark-mode footer {
+            background-color: #0f172a !important;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #eafaf1 0%, #e3f2fd 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-slide-left {
+            animation: slideLeft 0.6s ease-out;
+        }
+        
+        @keyframes slideLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-slide-right {
+            animation: slideRight 0.6s ease-out;
+        }
+        
+        @keyframes slideRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-animation {
+            animation: pulse-ring 2s infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(34, 197, 94, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
+        }
+        
+        .stat-counter {
+            counter-increment: stat-counter;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #22c55e, #10b981);
+            border-radius: 2px;
+        }
+        
+        .feature-card {
+            background: #F9F5F0;
+            border-left: 4px solid #22c55e;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.15);
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%);
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 60px;
+            color: #22c55e;
+            opacity: 0.3;
+        }
+        
+        .contact-form {
+            background: linear-gradient(135deg, #F9F5F0 0%, #f0fdf4 100%);
+            border-radius: 16px;
+        }
+        
+        input, textarea, select {
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(34, 197, 94, 0.3);
+        }
+        
+        .pricing-toggle {
+            background: #f3f4f6;
+            border-radius: 50px;
+            padding: 4px;
+            display: inline-flex;
+            gap: 4px;
+        }
+        
+        .pricing-toggle button {
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .pricing-toggle button.active {
+            background: white;
+            color: #22c55e;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-toggle button:not(.active) {
+            color: #6b7280;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #22c55e;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .chatbot-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(34, 197, 94, 0.5);
+        }
+        
+        .chatbot-button svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+        
+        .chatbot-modal {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+            z-index: 998;
+            overflow: hidden;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        .chatbot-modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chatbot-header {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-content {
+            padding: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .chatbot-message {
+            margin-bottom: 12px;
+        }
+        
+        .bot-message {
+            background: #f3f4f6;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        
+        .chatbot-options {
+            padding: 12px;
+            background: #fafafa;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .chatbot-option {
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+        
+        .chatbot-option:hover {
+            background: #e5e7eb;
+            border-color: #22c55e;
+        }
+        
+        .chatbot-suggestion {
+            background: #f0fdf4;
+            border: 1px solid #dcfce7;
+            color: #166534;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-align: left;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        
+        .chatbot-suggestion:hover {
+            background: #e0ffea;
+            border-color: #22c55e;
+            transform: translateX(2px);
+        }
+        
+        .chatbot-input-area {
+            padding: 12px;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+        }
+        
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0;
+        }
+    
+    </style>
+</head>
+<body class="light-mode bg-[#FEFDFB] text-gray-800">
+
+<!-- Header/Navegação -->
+<header class="fixed w-full shadow-md bg-[#FEFDFB] z-50" id="header">
+    <nav class="container mx-auto flex justify-between items-center py-4 px-4 md:px-0">
+        <div class="flex items-center gap-2">
+            <span class="text-green-800 text-2xl font-bold tracking-tight">BrainCare</span>
+        </div>
+        
+        <button class="md:hidden text-gray-700" onclick="toggleMobileMenu()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+        <ul class="hidden md:flex items-center gap-8">
+            <li><a href="#conformidade" class="hover:text-green-700 transition font-medium">Conformidade Legal</a></li>
+            <li><a href="#sobre" class="hover:text-green-700 transition font-medium">Quem Somos</a></li>
+            <li><a href="#servicos" class="hover:text-green-700 transition font-medium">Serviços</a></li>
+            <li><a href="#publico" class="hover:text-green-700 transition font-medium">Para Quem</a></li>
+            <li><a href="#importancia" class="hover:text-green-700 transition font-medium">Por Que Importa</a></li>
+            <li><a href="#planos" class="hover:text-green-700 transition font-medium">Planos</a></li>
+            <li><a href="#contato" class="hover:text-green-700 transition font-medium">Contato</a></li>
+        </ul>
+        
+        <div class="flex items-center gap-4">
+            <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
+                <span id="theme-icon">🌙</span>
+            </button>
+            <a href="#contato" class="btn-primary text-white px-6 py-2 rounded-full font-semibold shadow-lg hidden md:block">
+                Fale Conosco
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#FEFDFB] border-t border-gray-200">
+        <div class="container mx-auto px-4 py-4">
+            <ul class="flex flex-col gap-4">
+                <li><button class="w-full text-left py-2 hover:text-green-700 transition font-medium" onclick="toggleTheme()">
+                    <span id="theme-icon-mobile">🌙</span> Alternar Tema
+                </button></li>
+                <li><a href="#conformidade" class="block py-2 hover:text-green-700 transition font-medium" onclick="closeMobileMenu()">Conformidade Legal</a></li>
+                <li><a href="#sobre" class="block py-2 hover:text-green-700 transition font-medium" onclick="closeMobileMenu()">Quem Somos</a></li>
+                <li><a href="#servicos" class="block py-2 hover:text-green-700 transition font-medium" onclick="closeMobileMenu()">Serviços</a></li>
+                <li><a href="#publico" class="block py-2 hover:text-green-700 transition font-medium" onclick="closeMobileMenu()">Para Quem</a></li>
+                <li><a href="#importancia" class="block py-2 hover:text-green-700 transition font-medium" onclick="closeMobileMenu()">Por Que Importa</a></li>
+                <li><a href="#planos" class="block py-2 hover:text-green-700 transition font-medium" onclick="closeMobileMenu()">Planos</a></li>
+                <li><a href="#contato" class="block py-2 hover:text-green-700 transition font-medium" onclick="closeMobileMenu()">Contato</a></li>
+                <li class="pt-4 border-t border-gray-200">
+                    <a href="#contato" class="btn-primary text-white px-6 py-2 rounded-full font-semibold shadow-lg block text-center" onclick="closeMobileMenu()">Fale Conosco</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-bg pt-28 md:pt-40 pb-20 relative overflow-hidden">
+    <div class="absolute top-10 left-10 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+    <div class="absolute top-40 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+    
+    <div class="container mx-auto flex flex-col items-center px-4 md:px-0 relative z-10">
+        <div class="w-full max-w-4xl text-center animate-slide-left">
+            <div class="mb-4 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                ✨ Bem-vindo à BrainCare
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Saúde Mental <span class="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">Corporativa</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                Proteja a saúde mental dos seus colaboradores e cumpra as normas legais. BrainCare oferece profissionais especializados para cuidar da saúde mental no ambiente corporativo.
+            </p>
+            <p class="text-sm text-gray-500 max-w-2xl mb-8">
+                <strong>Conformidade Legal:</strong> Atendemos às exigências de normas que obrigam as organizações a proteger a saúde mental de seus trabalhadores.
+            </p>
+            <div class="flex gap-4 flex-wrap">
+                <a href="#planos" class="btn-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg">
+                    Ver Planos
+                </a>
+                <a href="#servicos" class="border-2 border-green-600 text-green-600 px-8 py-3 rounded-full font-semibold hover:bg-green-50 transition">
+                    Saiba Mais
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção: Conformidade Legal e Normas -->
+<section id="conformidade" class="py-20 bg-gradient-to-b from-[#F9F5F0] to-[#F3F0E8]">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="text-center mb-16 animate-fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span class="section-title">Responsabilidade Legal com a Saúde Mental</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
+                Você sabe quais são as obrigações legais da sua empresa em relação à saúde mental de seus colaboradores?
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- Card 1: Normas Brasileiras -->
+            <div class="rounded-xl shadow-lg p-8 hover-scale animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Normas Brasileiras</h3>
+                    <ul class="text-gray-700 space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-600 font-bold text-lg">✓</span>
+                            <span><strong>Constituição Federal (Art. 7º):</strong> Direito à proteção da vida e saúde no trabalho</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-600 font-bold text-lg">✓</span>
+                            <span><strong>CLT (Art. 157-159):</strong> Obrigação de medidas de proteção à integridade física e mental</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-600 font-bold text-lg">✓</span>
+                            <span><strong>NR 5 e NR 7:</strong> Programas de prevenção e monitoramento da saúde do trabalhador</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 2: Consequências do Não Cumprimento -->
+            <div class="rounded-xl shadow-lg p-8 hover-scale animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-lg p-6 mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Riscos e Consequências</h3>
+                    <ul class="text-gray-700 space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-600 font-bold text-lg">⚠</span>
+                            <span><strong>Multas e Processos:</strong> Autuações da fiscalização do trabalho</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-600 font-bold text-lg">⚠</span>
+                            <span><strong>Responsabilidade Civil:</strong> Indenizações por danos morais e materiais</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-600 font-bold text-lg">⚠</span>
+                            <span><strong>Afastamentos e Incapacidades:</strong> Aumento de custo com benefícios previdenciários</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blocos informativos coloridos -->
+        <div class="grid md:grid-cols-3 gap-6 mt-12">
+            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 shadow-lg hover-scale animate-fade-in" style="animation-delay: 0.3s;">
+                <div class="text-4xl font-bold text-yellow-600 mb-3">85%</div>
+                <p class="text-gray-700 font-semibold">Das empresas precisam melhorar seus programas de saúde mental</p>
+                <p class="text-sm text-gray-600 mt-3">Conforme pesquisas de conformidade corporativa</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-lg hover-scale animate-fade-in" style="animation-delay: 0.4s;">
+                <div class="text-4xl font-bold text-green-600 mb-3">100%</div>
+                <p class="text-gray-700 font-semibold">De conformidade com normas é nosso compromisso</p>
+                <p class="text-sm text-gray-600 mt-3">Atendemos todas as exigências legais federais</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 shadow-lg hover-scale animate-fade-in" style="animation-delay: 0.5s;">
+                <div class="text-4xl font-bold text-purple-600 mb-3">ROI+</div>
+                <p class="text-gray-700 font-semibold">Redução de custos com afastamentos</p>
+                <p class="text-sm text-gray-600 mt-3">Investimento em saúde mental se paga em menos de 1 ano</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção: Quem Somos -->
+<section id="sobre" class="py-20 bg-[#F9F5F0]">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="text-center mb-16 animate-fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span class="section-title">Quem Somos</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
+                BrainCare é um prestador de serviços B2B especializado em proteger a saúde mental corporativa, ajudando empresas a atender normas legais e promover o bem-estar de seus colaboradores.
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-12 mt-16">
+            <div class="feature-card rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Missão</h3>
+                <p class="text-gray-600">
+                    Proteger a saúde mental dos colaboradores corporativos, reduzindo riscos psicológicos e garantindo conformidade com normas legais de proteção à saúde do trabalhador.
+                </p>
+            </div>
+            
+            <div class="feature-card rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Visão</h3>
+                <p class="text-gray-600">
+                    Ser a solução de referência para organizações que desejam implementar estratégias de saúde mental corporativa com responsabilidade, ética e resultados mensuráveis.
+                </p>
+            </div>
+            
+            <div class="feature-card rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.3s;">
+                <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m7 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Valores</h3>
+                <p class="text-gray-600">
+                    Conformidade Legal, Confidencialidade, Profissionalismo, Empatia e Inovação em Tecnologia de Saúde Mental são nossos pilares fundamentais.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção: O Que É Nosso Serviço -->
+<section id="servicos" class="py-20 bg-gradient-to-b from-[#F9F5F0] to-[#F9F5F0]">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="text-center mb-16 animate-fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span class="section-title">Nossos Serviços</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
+                Oferecemos profissionais especializados que trabalham com seus colaboradores para identificar necessidades, implementar soluções e garantir conformidade regulatória.
+            </p>
+            <p class="text-sm text-gray-500 max-w-2xl mx-auto mt-3">
+                <strong>Confidencialidade Garantida:</strong> Todos os processos são anônimos e confidenciais, protegendo a privacidade dos colaboradores.
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-12 items-center mt-16">
+            <div class="space-y-8 animate-slide-left">
+                <div class="feature-card rounded-xl p-6">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">🎯</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Avaliação Corporativa</h3>
+                            <p class="text-gray-600">Diagnóstico completo da saúde mental nos ambientes corporativos com avaliações anônimas que protegem os colaboradores.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card rounded-xl p-6">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">👥</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Profissionais Especializados</h3>
+                            <p class="text-gray-600">Equipe de psicólogos e especialistas em saúde corporativa para cuidar do bem-estar mental dos seus colaboradores.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card rounded-xl p-6">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">📋</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Conformidade Legal</h3>
+                            <p class="text-gray-600">Garantimos atendimento a normas e regulamentações que protegem a saúde mental no ambiente de trabalho.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card rounded-xl p-6">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">📊</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Relatórios e Insights</h3>
+                            <p class="text-gray-600">Dados agregados e insightful sobre saúde mental organizacional para tomar decisões estratégicas informadas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="animate-slide-right">
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=600&fit=crop" alt="Sessão de Terapia" class="rounded-3xl shadow-2xl">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção: Para Quem É -->
+<section id="publico" class="py-20 bg-[#F9F5F0]">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="text-center mb-16 animate-fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span class="section-title">Soluções Corporativas</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
+                BrainCare é a solução especializada para empresas e organizações que precisam proteger a saúde mental de seus colaboradores.
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8 mt-16">
+            <!-- Card: Empresas -->
+            <div class="hover-scale group rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-green-200 animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="h-48 bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center">
+                    <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5.581m0 0H9m0 0h5.581M9 3h6m0 0h3m-3 0V7m0 0h-3"></path>
+                    </svg>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Para Organizações</h3>
+                    <p class="text-gray-600 mb-6">
+                        Implemente programas de saúde mental que garantem conformidade legal, promovem bem-estar dos colaboradores e reduzem riscos associados a problemas psicológicos.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex gap-3">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span>Conformidade com normas legais de proteção à saúde</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span>Profissionais especializados dedicados</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span>Relatórios de saúde mental organizacional</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span>Redução de riscos psicológicos e burnout</span>
+                        </li>
+                    </ul>
+                    <button onclick="scrollToContact()" class="mt-6 w-full btn-primary text-white py-3 rounded-lg font-semibold">
+                        Solicitar Demonstração
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Card: ROI -->
+            <div class="hover-scale group rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-green-100 animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="h-48 bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
+                    <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6M3 7h8v8"></path>
+                    </svg>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Benefícios Empresariais</h3>
+                    <p class="text-gray-600 mb-6">
+                        Melhore produtividade, reduza rotatividade, minimize absenteísmo e cumpra obrigações legais sem gerir diretamente toda a área de saúde mental.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex gap-3">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span>Redução de afastamentos por saúde mental</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span>Aumento de engajamento e clima organizacional</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span>Proteção contra passivos trabalhistas</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span>Dados insights para decisões estratégicas</span>
+                        </li>
+                    </ul>
+                    <button onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})" class="mt-6 w-full border-2 border-green-600 text-green-600 py-3 rounded-lg font-semibold hover:bg-green-50 transition">
+                        Ver Planos Corporativos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção: Por Que Importa -->
+<section id="importancia" class="py-20 bg-gradient-to-b from-[#F9F5F0] to-[#F9F5F0]">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="text-center mb-16 animate-fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span class="section-title">Por Que Importa</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
+                Saúde mental no trabalho é uma obrigação legal e um fator crítico para o sucesso empresarial. Organizações que investem em saúde mental reduzem custos e aumentam produtividade.
+            </p>
+        </div>
+        
+        <!-- Estatísticas -->
+        <div class="stats-grid mt-16 mb-20 animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="stat-item bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg p-8 hover-scale">
+                <div class="stat-number">12B</div>
+                <p class="text-gray-600 mt-2">Dias de trabalho perdidos por depressão e ansiedade</p>
+                <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">WHO: saúde mental no trabalho</a></p>
+            </div>
+            
+            <div class="stat-item bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl shadow-lg p-8 hover-scale" style="animation-delay: 0.1s;">
+                <div class="stat-number">15%</div>
+                <p class="text-gray-600 mt-2">Trabalhadores em idade ativa vivem com transtornos mentais</p>
+                <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/publications/i/item/9789240053052" target="_blank" class="text-blue-600 hover:underline">Diretrizes WHO para saúde mental no trabalho</a></p>
+            </div>
+            
+            <div class="stat-item bg-gradient-to-br from-red-50 to-red-100 rounded-xl shadow-lg p-8 hover-scale" style="animation-delay: 0.2s;">
+                <div class="stat-number">US$ 1 tri</div>
+                <p class="text-gray-600 mt-2">Custo anual de depressão e ansiedade em perda de produtividade</p>
+                <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">WHO: saúde mental no trabalho</a></p>
+            </div>
+            
+            <div class="stat-item bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-lg p-8 hover-scale" style="animation-delay: 0.3s;">
+                <div class="stat-number">1 em 3</div>
+                <p class="text-gray-600 mt-2">Somente 1 em 3 com depressão recebe tratamento em países de renda alta</p>
+                <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/depression" target="_blank" class="text-blue-600 hover:underline">WHO: depressão</a></p>
+            </div>
+        </div>
+        
+        <!-- Depoimentos -->
+        <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">O Que Especialistas e Líderes Dizem</h3>
+            <div class="grid md:grid-cols-3 gap-8 animate-fade-in" style="animation-delay: 0.3s;">
+                <div class="testimonial-card p-8 hover-scale">
+                    <p class="text-gray-700 mb-4 italic">
+                        "É urgente que empresas ofereçam rotas anônimas para cuidar da saúde mental sem medo de retaliação. Essa abordagem preserva a confiança e reduz barreiras para buscar ajuda."
+                    </p>
+                    <div class="flex items-center gap-3 pt-4 border-t">
+                        <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full"></div>
+                        <div>
+                            <p class="font-semibold text-gray-900 text-sm">Dr. Ricardo Melo</p>
+                            <p class="text-xs text-gray-600">Especialista em Saúde Mental Corporativa</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">Fonte: WHO - saúde mental no trabalho</a></p>
+                </div>
+                
+                <div class="testimonial-card p-8 hover-scale" style="animation-delay: 0.1s;">
+                    <p class="text-gray-700 mb-4 italic">
+                        "A melhor prevenção é oferecer uma orientação inicial clara e anônima. Assim, as pessoas podem confirmar suas dúvidas sem sofrer estigma ou pressão."
+                    </p>
+                    <div class="flex items-center gap-3 pt-4 border-t">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full"></div>
+                        <div>
+                            <p class="font-semibold text-gray-900 text-sm">Juliana Alves</p>
+                            <p class="text-xs text-gray-600">Consultora de Bem-estar e RH</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">Fonte: WHO - saúde mental no trabalho</a></p>
+                </div>
+                
+                <div class="testimonial-card p-8 hover-scale" style="animation-delay: 0.2s;">
+                    <p class="text-gray-700 mb-4 italic">
+                        "Diagnóstico só deve ser feito por profissionais. Uma análise eletrônica anônima que indica o caminho certo é uma ferramenta poderosa para quem busca cuidado."
+                    </p>
+                    <div class="flex items-center gap-3 pt-4 border-t">
+                        <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full"></div>
+                        <div>
+                            <p class="font-semibold text-gray-900 text-sm">Ana Paula Campos</p>
+                            <p class="text-xs text-gray-600">Psicóloga e autora</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3"><a href="https://www.psychiatry.org/patients-families/what-is-mental-illness" target="_blank" class="text-blue-600 hover:underline">Fonte: APA - diagnóstico e cuidado</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção: Planos -->
+<section id="planos" class="py-20 bg-[#F9F5F0]">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="text-center mb-16 animate-fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span class="section-title">Planos Corporativos</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
+                Soluções escaláveis para sua organização. Preços baseados no tamanho da sua equipe.
+            </p>
+        </div>
+        
+        <!-- Planos Corporativos -->
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-6 mb-8 animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border-2 border-blue-200 hover-scale">
+                    <h4 class="font-bold text-gray-900 mb-4 text-lg">Pequenas Empresas</h4>
+                    <p class="text-3xl font-bold text-blue-600 mb-2">Até 50</p>
+                    <p class="text-sm text-gray-600 mb-6">colaboradores</p>
+                    <p class="text-2xl font-bold text-gray-900 mb-6">R$ 59<span class="text-lg text-gray-600 font-normal">/pessoa</span></p>
+                    <ul class="space-y-3 text-sm text-gray-700 mb-6">
+                        <li>✓ Avaliações anônimas</li>
+                        <li>✓ 1 Profissional dedicado</li>
+                        <li>✓ Relatórios mensais</li>
+                        <li>✓ Conformidade legal</li>
+                    </ul>
+                    <button onclick="scrollToContact()" class="w-full btn-primary text-white py-2 rounded-lg font-semibold">
+                        Solicitar Demo
+                    </button>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl border-4 border-green-400 hover-scale relative">
+                    <div class="absolute -top-4 left-4 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+                        MAIS POPULAR
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-4 text-lg">Médias/Grandes</h4>
+                    <p class="text-3xl font-bold text-green-600 mb-2">51 - 500</p>
+                    <p class="text-sm text-gray-600 mb-6">colaboradores</p>
+                    <p class="text-2xl font-bold text-gray-900 mb-6">R$ 39<span class="text-lg text-gray-600 font-normal">/pessoa</span></p>
+                    <ul class="space-y-3 text-sm text-gray-700 mb-6">
+                        <li>✓ Avaliações anônimas</li>
+                        <li>✓ 2-3 Profissionais</li>
+                        <li>✓ Relatórios semanais</li>
+                        <li>✓ Workshops corporativos</li>
+                        <li>✓ Plano customizado</li>
+                    </ul>
+                    <button onclick="scrollToContact()" class="w-full btn-primary text-white py-2 rounded-lg font-semibold">
+                        Solicitar Proposta
+                    </button>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl border-2 border-purple-200 hover-scale">
+                    <h4 class="font-bold text-gray-900 mb-4 text-lg">Grandes Empresas</h4>
+                    <p class="text-3xl font-bold text-purple-600 mb-2">500+</p>
+                    <p class="text-sm text-gray-600 mb-6">colaboradores</p>
+                    <p class="text-lg font-bold text-gray-900 mb-6">Totalmente<br/>Customizado</p>
+                    <ul class="space-y-3 text-sm text-gray-700 mb-6">
+                        <li>✓ Solução white-label</li>
+                        <li>✓ Equipe dedicada</li>
+                        <li>✓ Integração sistemas</li>
+                        <li>✓ Consultoria estratégica</li>
+                    </ul>
+                    <button onclick="scrollToContact()" class="w-full btn-primary text-white py-2 rounded-lg font-semibold">
+                        Falar com Vendas
+                    </button>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
+                <!-- Plano Mensal Individual -->
+                <div class="hover-scale rounded-2xl shadow-lg p-8 bg-[#F9F5F0] border-2 border-transparent hover:border-green-200">
+                    <div class="mb-2 inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">
+                        Flexibilidade
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-4">Plano Mensal</h3>
+                    <p class="text-5xl font-bold text-green-600 mb-2">R$ 29,99<span class="text-base text-gray-600 font-normal">/mês</span></p>
+                    <p class="text-gray-600 mb-8">Ideal para quem quer começar sem compromisso longo.</p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Questionários anônimos</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Análise anônima com recomendação</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Relatório de próximos passos</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Privacidade e segurança garantidas</span>
+                        </li>
+                    </ul>
+                    
+                    <button onclick="openModal('monthly')" class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
+                        Começar Agora
+                    </button>
+                </div>
+                
+                <!-- Plano Anual Individual -->
+                <div class="hover-scale rounded-2xl shadow-lg p-8 bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200 relative">
+                    <div class="absolute top-6 right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                        MELHOR VALOR
+                    </div>
+                    <div class="mb-2 inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
+                        Economia
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-4">Plano Anual</h3>
+                    <p class="text-5xl font-bold text-green-600 mb-2">R$ 279,99<span class="text-base text-gray-600 font-normal">/ano</span></p>
+                    <p class="text-green-700 font-semibold mb-8">Economize R$ 79,89 (22% de desconto)</p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Questionários anônimos</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Recomendações ajustadas ao seu caso</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Guia de confirmação e encaminhamento</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Apoio para decidir seu próximo passo</span>
+                        </li>
+                    </ul>
+                    
+                    <button onclick="openModal('annual')" class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
+                        Assinar Agora
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Planos Corporativos -->
+        <div id="corporate-tab" class="pricing-content hidden">
+            <div class="max-w-4xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="rounded-2xl shadow-lg p-12 bg-[#F9F5F0] border-2 border-blue-200">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Planos Corporativos</h3>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Soluções personalizadas para sua empresa. Cada organização é única, por isso nossos planos são customizáveis.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
+                            <h4 class="font-bold text-gray-900 mb-2">Até 50 colaboradores</h4>
+                            <p class="text-3xl font-bold text-blue-600 mb-4">A partir de</p>
+                            <p class="text-2xl font-bold text-gray-900">R$ 59/pessoa</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-2 border-green-200">
+                            <h4 class="font-bold text-gray-900 mb-2">51 a 500 colaboradores</h4>
+                            <p class="text-3xl font-bold text-green-600 mb-4">A partir de</p>
+                            <p class="text-2xl font-bold text-gray-900">R$ 39/pessoa</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl">
+                            <h4 class="font-bold text-gray-900 mb-2">500+ colaboradores</h4>
+                            <p class="text-3xl font-bold text-purple-600 mb-4">Customizado</p>
+                            <p class="text-gray-600">Entre em contato conosco</p>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold text-gray-900 mb-6">Incluso em todos os planos:</h4>
+                    <div class="grid md:grid-cols-2 gap-4 mb-10">
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Avaliações anônimas para colaboradores</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Relatórios agregados de bem-estar</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Indicação de como apoiar sua equipe</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Guias e materiais de prevenção</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Apoio para implementar ações de cuidado</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="text-gray-700">Plano de orientação corporativa personalizável</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="scrollToContact()" class="w-full btn-primary text-white py-4 rounded-lg font-semibold text-lg">
+                        Solicitar Proposta Personalizada
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção: Contato -->
+<section id="contato" class="py-20 bg-gradient-to-b from-[#F9F5F0] to-[#F9F5F0]">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="text-center mb-16 animate-fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span class="section-title">Entre em Contato</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
+                Pronto para transformar a saúde mental da sua empresa? Fale conosco hoje!
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-12 mt-16">
+            <!-- Informações de Contato -->
+            <div class="space-y-8 animate-slide-left">
+                <div class="flex gap-6">
+                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Email</h3>
+                        <p class="text-gray-600">contato@braincare.com.br</p>
+                        <p class="text-gray-600">empresas@braincare.com.br</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-6">
+                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Telefone</h3>
+                        <p class="text-gray-600">(11) 3000-0000</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-6">
+                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Localização</h3>
+                        <p class="text-gray-600">São Paulo, SP - Brasil</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Formulário de Contato -->
+            <div class="contact-form p-10 animate-slide-right">
+                <form onsubmit="handleFormSubmit(event)">
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Seu Nome *</label>
+                        <input type="text" required placeholder="Digite seu nome" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Email *</label>
+                        <input type="email" required placeholder="seu@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Tipo de Interesse *</label>
+                        <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                            <option value="">Selecione uma opção</option>
+                            <option value="individual">Plano Individual</option>
+                            <option value="corporate">Programa Corporativo</option>
+                            <option value="partnership">Parceria</option>
+                            <option value="other">Outro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Telefone</label>
+                        <input type="tel" placeholder="(11) 99999-9999" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Mensagem *</label>
+                        <textarea required placeholder="Conte-nos mais sobre suas necessidades..." rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"></textarea>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="flex gap-3 cursor-pointer">
+                            <input type="checkbox" required class="w-4 h-4 text-green-600 rounded">
+                            <span class="text-sm text-gray-700">Concordo com os termos de privacidade e proteção de dados</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="grid md:grid-cols-4 gap-8 mb-12">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                        <span class="font-bold text-white">B</span>
+                    </div>
+                    <span class="text-xl font-bold">BrainCare</span>
+                </div>
+                <p class="text-gray-400">Proteção de saúde mental corporativa em conformidade com normas legais.</p>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">Produto</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#servicos" class="hover:text-white transition">Serviços</a></li>
+                    <li><a href="#planos" class="hover:text-white transition">Planos</a></li>
+                    <li><a href="#importancia" class="hover:text-white transition">Por Que Usar</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">Empresa</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#sobre" class="hover:text-white transition">Sobre Nós</a></li>
+                    <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                    <li><a href="#" class="hover:text-white transition">Carreiras</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">Legal</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition">Privacidade</a></li>
+                    <li><a href="#" class="hover:text-white transition">Termos</a></li>
+                    <li><a href="#" class="hover:text-white transition">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-800 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2026 BrainCare. Todos os direitos reservados.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition">LinkedIn</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Instagram</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Modal de Confirmação -->
+<div id="modal" class="modal">
+    <div class="bg-[#F9F5F0] rounded-2xl shadow-2xl max-w-md w-11/12 p-8 animate-fade-in">
+        <button onclick="closeModal()" class="float-right text-gray-500 hover:text-gray-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Próximo Passo</h3>
+        <p id="modal-text" class="text-gray-600 mb-6"></p>
+        <div class="space-y-3">
+            <button onclick="closeModal()" class="w-full btn-primary text-white py-2 rounded-lg font-semibold">
+                Ir para Formulário
+            </button>
+            <button onclick="closeModal()" class="w-full border-2 border-gray-300 text-gray-900 py-2 rounded-lg font-semibold hover:bg-gray-50 transition">
+                Fechar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Chatbot Widget -->
+<button class="chatbot-button" onclick="toggleChatbot()" title="Chat BrainCare">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+</button>
+
+<div id="chatbot-modal" class="chatbot-modal">
+    <div class="chatbot-header">
+        <h3 class="font-semibold">BrainCare Assistente</h3>
+        <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
+    </div>
+    <div class="chatbot-content" id="chatbot-content">
+        <div class="chatbot-message">
+            <div class="bot-message">
+                Olá! 👋 Bem-vindo ao BrainCare. Estou aqui para responder qualquer dúvida sobre nossos serviços, preços, normas legais e muito mais. Como posso ajudar?
+            </div>
+        </div>
+        <div class="chatbot-message" style="margin-top: 12px;">
+            <div class="bot-message">
+                💡 <strong>Sugestões de perguntas:</strong>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                <button class="chatbot-suggestion" onclick="sendPredefinedQuestion('O que é BrainCare?')">O que é BrainCare?</button>
+                <button class="chatbot-suggestion" onclick="sendPredefinedQuestion('Quais são seus planos de preço?')">Quais são seus planos de preço?</button>
+                <button class="chatbot-suggestion" onclick="sendPredefinedQuestion('Como ficamos em conformidade legal?')">Como ficamos em conformidade legal?</button>
+            </div>
+        </div>
+    </div>
+    <div class="chatbot-input-area" id="chatbot-input-area">
+        <input type="text" id="chatbot-input" placeholder="Digite sua pergunta..." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500" onkeypress="if(event.key === 'Enter') sendChatbotMessage()">
+        <button onclick="sendChatbotMessage()" class="w-full mt-2 bg-green-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-green-700 transition">Enviar</button>
+    </div>
+</div>
+
+<script>
+    function showTab(tab) {
+        document.querySelectorAll('.pricing-content').forEach(el => el.classList.add('hidden'));
+        document.getElementById(tab + '-tab').classList.remove('hidden');
+        
+        document.querySelectorAll('.pricing-toggle button').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+    
+    function scrollToContact() {
+        document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function openModal(plan) {
+        const modal = document.getElementById('modal');
+        const text = document.getElementById('modal-text');
+        
+        if (plan === 'monthly') {
+            text.textContent = 'Você selecionou o Plano Mensal (R$ 29,99/mês). Preencha o formulário de contato abaixo para completar sua inscrição!';
+        } else if (plan === 'annual') {
+            text.textContent = 'Você selecionou o Plano Anual (R$ 279,99/ano). Aproveite 22% de economia! Preencha o formulário para começar.';
+        }
+        
+        modal.classList.add('active');
+        scrollToContact();
+    }
+    
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+    }
+    
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+    }
+    
+    function closeMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.add('hidden');
+    }
+    
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        alert('Obrigado! Entraremos em contato em breve.');
+        event.target.reset();
+    }
+    
+    function toggleChatbot() {
+        const chatbot = document.getElementById('chatbot-modal');
+        chatbot.classList.toggle('active');
+    }
+    
+    function chatbotResponse(option) {
+        const content = document.getElementById('chatbot-content');
+        const inputArea = document.getElementById('chatbot-input-area');
+        const optionsArea = document.getElementById('chatbot-options');
+        let response = '';
+        
+        if (option === 'empresa') {
+            response = 'Ótimo! Somos uma solução B2B especializada em proteger a saúde mental corporativa. Ajudamos sua empresa a:\n\n✓ Cumprir normas legais\n✓ Reduzir absenteísmo\n✓ Aumentar engajamento\n✓ Proteger contra riscos psicológicos\n\nTem alguma dúvida específica?';
+        } else if (option === 'servicos') {
+            response = 'Oferecemos:\n\n🎯 Avaliações corporativas anônimas\n👥 Profissionais especializados dedicados\n📋 Conformidade legal garantida\n📊 Relatórios e insights estratégicos\n\nTodos os processos são confidenciais. Qual aspecto te interessa mais?';
+        } else if (option === 'contato') {
+            response = 'Perfeito! Você pode falar conosco de várias formas:\n\n📧 Email: empresas@braincare.com.br\n📞 Telefone: (11) 3000-0000\n📝 Formulário no site\n\nOu tire suas dúvidas agora mesmo comigo! 😊';
+        } else if (option === 'planos') {
+            response = 'Nossos planos corporativos são:\n\n💼 Até 50 colaboradores: R$ 59/pessoa\n💼 51 a 500 colaboradores: R$ 39/pessoa\n💼 500+ colaboradores: Customizado\n\nTodos incluem avaliações, profissionais e relatórios. Qual o tamanho da sua empresa?';
+        }
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chatbot-message';
+        const botMsg = document.createElement('div');
+        botMsg.className = 'bot-message';
+        botMsg.textContent = response;
+        messageDiv.appendChild(botMsg);
+        content.appendChild(messageDiv);
+        content.scrollTop = content.scrollHeight;
+        
+        // Mostrar caixa de entrada de texto
+        inputArea.style.display = 'block';
+        optionsArea.style.display = 'none';
+    }
+    
+    function sendChatbotMessage() {
+        const input = document.getElementById('chatbot-input');
+        const userMessage = input.value.trim();
+        
+        if (!userMessage) return;
+        
+        const content = document.getElementById('chatbot-content');
+        
+        // Adicionar mensagem do usuário
+        const userMsgDiv = document.createElement('div');
+        userMsgDiv.className = 'chatbot-message';
+        const userBubble = document.createElement('div');
+        userBubble.style.cssText = 'background: #22c55e; color: white; padding: 8px 12px; border-radius: 8px; text-align: right; font-size: 14px; margin-left: 40px;';
+        userBubble.textContent = userMessage;
+        userMsgDiv.appendChild(userBubble);
+        content.appendChild(userMsgDiv);
+        input.value = '';
+        
+        // Simular resposta do bot com IA
+        setTimeout(() => {
+            const botResponse = generateBotResponse(userMessage);
+            const botMsgDiv = document.createElement('div');
+            botMsgDiv.className = 'chatbot-message';
+            const botBubble = document.createElement('div');
+            botBubble.className = 'bot-message';
+            botBubble.textContent = botResponse;
+            botMsgDiv.appendChild(botBubble);
+            content.appendChild(botMsgDiv);
+            content.scrollTop = content.scrollHeight;
+        }, 500);
+    }
+    
+    function generateBotResponse(userMessage) {
+        const msg = userMessage.toLowerCase();
+        let conversationHistory = document.getElementById('chatbot-content').innerText.toLowerCase();
+        
+        // Perguntas sobre o BrainCare (informações gerais)
+        if (msg.match(/o\s+que\s+é|qual\s+é.*brain|braincare\s+significa|explique|como\s+funciona/i)) {
+            return '🧠 O BrainCare é uma plataforma B2B especializada em SAÚDE MENTAL CORPORATIVA. Oferecemos:\n\n✅ Programas de proteção à saúde mental dos colaboradores\n✅ Cumprimento de normas legais (CLT, Constituição Federal, NRs)\n✅ Profissionais especializados dedicados à sua empresa\n✅ Avaliações anônimas e confidenciais\n✅ Relatórios e insights estratégicos\n✅ Redução comprovada de absenteísmo\n\nEssencialmente, ajudamos empresas a proteger a saúde mental de seus funcionários, evitando problemas como burnout, ansiedade e depressão.';
+        }
+        
+        // Preços e planos
+        if (msg.match(/preço|valor|quanto custa|tabela|plano|investimento|caro/i)) {
+            return '💰 NOSSOS PLANOS CORPORATIVOS:\n\n📍 Até 50 colaboradores: R$ 59/pessoa/mês\n📍 51 a 500 colaboradores: R$ 39/pessoa/mês\n📍 500+ colaboradores: Customizado\n\nTODOS INCLUEM:\n✓ Avaliações anônimas\n✓ Profissionais dedicados\n✓ Relatórios mensais/semanais\n✓ Suporte contínuo\n✓ Garantia de conformidade legal\n\nPor exemplo: uma empresa com 100 pessoas pagaria R$ 3.900/mês.\n\nQual o tamanho da sua empresa?';
+        }
+        
+        // Normas legais e conformidade
+        if (msg.match(/norma|lei|legal|conformidade|cumprimento|exigência|obrigação|regulamentação|artigo/i)) {
+            return '⚖️ NORMAS LEGAIS QUE CUMPRIMOS:\n\n🏛️ Constituição Federal (Artigo 7º)\n   → Direito à proteção da vida e saúde no trabalho\n\n📜 Consolidação das Leis Trabalhistas - CLT (Art. 157-159)\n   → Obrigação de medidas de proteção à integridade física e mental\n\n⚠️ Normas Regulamentadoras (NR-5, NR-7)\n   → Programas de prevenção de riscos ambientais\n   → Programas de monitoramento da saúde\n\nNÃO CUMPRIR estas normas gera:\n• Multas da fiscalização\n• Responsabilidade civil\n• Indenizações por danos morais\n\nO BrainCare garante 100% de conformidade!';
+        }
+        
+        // Serviços e o que oferecemos
+        if (msg.match(/serviço|oferec|disponib|inclui|funcionalidad|feature/i)) {
+            return '🎯 NOSSOS SERVIÇOS:\n\n1️⃣ AVALIAÇÕES CORPORATIVAS\n   • Diagnóstico anônimo do clima organizacional\n   • Identificação de riscos psicológicos\n   • Relatórios detalhados e insights\n\n2️⃣ PROFISSIONAIS ESPECIALIZADOS\n   • Psicólogos e especialistas dedicados\n   • Atendimento confidencial\n   • Programas de bem-estar customizados\n\n3️⃣ CONFORMIDADE LEGAL\n   • Documentação completa\n   • Atendimento a todas as normas\n   • Proteção jurídica\n\n4️⃣ SUPORTE CONTÍNUO\n   • Acompanhamento mensal/semanal\n   • Dashboards com métricas\n   • Acesso 24/7 ao assistente\n\nQuer detalhes sobre algum serviço específico?';
+        }
+        
+        // Contato e como falar com alguém
+        if (msg.match(/contato|falar|telefone|email|whatsapp|conversar|ligar|messenger|suporte/i)) {
+            return '📞 FORMAS DE CONTATO:\n\n📧 Email: empresas@braincare.com.br\n📱 Telefone: (11) 3000-0000\n💬 WhatsApp: (11) 99999-9999\n🌐 Site: www.braincare.com.br\n📋 Formulário de contato neste site\n\nOU, se preferir, fale direto comigo! Estou disponível para responder suas dúvidas. O que gostaria de saber?';
+        }
+        
+        // Saúde mental, problemas corporativos
+        if (msg.match(/saúde mental|depressão|ansiedade|estresse|burnout|problemas psicológic|bem-estar/i)) {
+            return '🧠 SAÚDE MENTAL CORPORATIVA É ESSENCIAL!\n\nPROBLEMAS COMUNS NO TRABALHO:\n• 15% dos trabalhadores vivem com transtornos mentais\n• 12 BILHÕES de dias de trabalho perdidos por depressão/ansiedade\n• Custo global: US$ 1 TRILHÃO em perda de produtividade\n\nCONSEQUÊNCIAS PARA A EMPRESA:\n❌ Absenteísmo aumentado\n❌ Turnover alto\n❌ Queda de produtividade\n❌ Riscos legais\n❌ Clima tóxico\n\nCOMO O BRAINCARE AJUDA:\n✅ Identifica problemas cedo\n✅ Implementa programas de proteção\n✅ Reduz afastamentos em 40%\n✅ Aumenta engajamento\n✅ Retorno do investimento em menos de 1 ano\n\nSua empresa sofre com isso?';
+        }
+        
+        // Demo e testes
+        if (msg.match(/demo|demonstração|teste|gratuito|trial|começar/i)) {
+            return '🎯 ÓTIMO! VAMOS AGENDAR SUA DEMONSTRAÇÃO EXCLUSIVA!\n\nPRECISAMOS DE:\n📋 Nome da sua empresa\n👥 Número de colaboradores\n🕐 Melhor horário para você\n📞 Telefone para contato\n\nPODEMOS FAZER:\n• Videoconferência (Teams, Zoom, Google Meet)\n• Apresentação customizada\n• Responder todas as suas dúvidas\n• Mostrar casos de sucesso\n\nVOCÊ PODE:\n1️⃣ Responder aqui direto\n2️⃣ Enviar email: empresas@braincare.com.br\n3️⃣ Ligar: (11) 3000-0000\n\nO que prefere?';
+        }
+        
+        // Vantagens e diferencial
+        if (msg.match(/por que|diferença|melhor|vantagem|concorrente|único|especial/i)) {
+            return '💪 POR QUE ESCOLHER O BRAINCARE?\n\n✨ DIFERENCIAL COMPETITIVO:\n\n🏆 Profissionais Especializados\n   • Psicólogos qualificados dedicados\n   • Experiência em saúde mental corporativa\n\n⚖️ Conformidade Legal 100%\n   • Atendimento às normas federais\n   • Proteção jurídica completa\n   • Documentação impecável\n\n🔒 Sigilo e Confidencialidade\n   • Avaliações completamente anônimas\n   • Dados protegidos por LGPD\n   • Privacidade garantida\n\n📊 ROI Comprovado\n   • Retorno do investimento em <1 ano\n   • Redução de 30-40% em afastamentos\n   • Aumento de 25% em engajamento\n\n💬 Suporte 24/7\n   • Assistente IA inteligente\n   • Profissionais disponíveis\n   • Resposta rápida\n\nEssas são as razões pelas quais empresas como a sua escolhem BrainCare!';
+        }
+        
+        // Estudos de caso e exemplos
+        if (msg.match(/exemplo|caso|resultado|sucesso|prova|evidence|estatística|dado/i)) {
+            return '📊 RESULTADOS REAIS:\n\n✅ CASO 1: Empresa com 150 colaboradores\n   • Redução de 35% em absenteísmo\n   • Aumento de 40% em engajamento\n   • ROI de 280% no primeiro ano\n\n✅ CASO 2: Empresa com 300 colaboradores\n   • Identificou 12% com riscos de burnout\n   • Implementou programas preventivos\n   • Afastamentos reduziram em 42%\n\n✅ CASO 3: Empresa com 500+ colaboradores\n   • Conformidade legal garantida\n   • Relatórios executivos mensais\n   • Mudança cultural positiva\n\n📈 ESTATÍSTICAS:\n   • 85% das empresas precisam melhorar saúde mental\n   • 92% dos clientes renovam contrato\n   • Média de 6 meses para ver resultados\n\nQuer ver um case study completo da sua indústria?';
+        }
+        
+        // Processo de implementação
+        if (msg.match(/implementação|como começa|processo|timeline|duração|quanto tempo/i)) {
+            return '⏱️ PROCESSO DE IMPLEMENTAÇÃO:\n\n📅 FASE 1: ALINHAMENTO (1 semana)\n   • Conhecer sua empresa\n   • Definir objetivos\n   • Preparar equipe\n\n📅 FASE 2: DIAGNÓSTICO (2-3 semanas)\n   • Avaliações corporativas anônimas\n   • Coleta de dados\n   • Análise inicial\n\n📅 FASE 3: PLANO DE AÇÃO (1 semana)\n   • Relatório executivo\n   • Recomendações estratégicas\n   • Definir próximos passos\n\n📅 FASE 4: IMPLEMENTAÇÃO (contínuo)\n   • Programas de bem-estar\n   • Acompanhamento profissional\n   • Ajustes conforme necessário\n\n⏳ TEMPO TOTAL INICIAL: 4-5 semanas\n🔄 SUPORTE CONTÍNUO: Meses/Anos\n\nPodemos começar quando você estiver pronto!';
+        }
+        
+        // Memória de conversas anteriores
+        if (conversationHistory.includes('preço') && msg.match(/mais|outro|alternativ|barato|caro/i)) {
+            return '💡 Entendo! Como mencionei, nossas opções são:\n\n• Até 50 pessoas: R$ 59/pessoa (melhor para PMEs)\n• 51-500 pessoas: R$ 39/pessoa (melhor custo-benefício)\n• 500+: Customizado (consultamos direto)\n\nAlém de preços, oferecemos:\n✓ Parcelamento flexível\n✓ Plano trimestral com desconto\n✓ Demonstração gratuita\n\nPosso agendar uma conversa com nosso time comercial?';
+        }
+        
+        if (conversationHistory.includes('serviço') && msg.match(/especific|detalh|profund|mais sobre/i)) {
+            return '🔍 DETALHES ADICIONAIS:\n\nQual aspecto você quer explorar?\n\n1️⃣ Como funcionam as AVALIAÇÕES?\n2️⃣ Quem são os PROFISSIONAIS?\n3️⃣ Como garantimos CONFIDENCIALIDADE?\n4️⃣ Qual é o SUPORTE OFERECIDO?\n5️⃣ Como são os RELATÓRIOS?\n\nDigite o número ou descreva sua dúvida!';
+        }
+        
+        // Resposta padrão melhorada
+        return '👍 Ótima pergunta!\n\nParece que meu banco de dados não tem informação específica sobre isso. Mas posso ajudá-lo com:\n\n📌 TÓPICOS QUE DOMINO:\n• O que é BrainCare\n• Preços e planos\n• Normas legais\n• Serviços oferecidos\n• Como começar\n• Contato com especialista\n\n💬 Rephrase sua pergunta ou escolha um dos tópicos acima!\n\nOu conecte direto com nosso time:\n📧 empresas@braincare.com.br';
+    }
+    
+    function sendPredefinedQuestion(question) {
+        const input = document.getElementById('chatbot-input');
+        input.value = question;
+        sendChatbotMessage();
+    }
+    
+    // DARK MODE TOGGLE
+    function toggleTheme() {
+        const body = document.body;
+        const header = document.getElementById('header');
+        const themeMobileIcon = document.getElementById('theme-icon-mobile');
+        const themeIcon = document.getElementById('theme-icon');
+        const isDarkMode = body.classList.contains('dark-mode');
+        
+        if (isDarkMode) {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            body.style.backgroundColor = '#FEFDFB';
+            header.style.backgroundColor = '#FEFDFB';
+            header.style.color = '#1f2937';
+            localStorage.setItem('theme', 'light');
+            themeIcon.textContent = '🌙';
+            if (themeMobileIcon) themeMobileIcon.textContent = '🌙';
+        } else {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            body.style.backgroundColor = '#1a1a2e';
+            header.style.backgroundColor = '#0f172a';
+            header.style.color = '#f3f4f6';
+            localStorage.setItem('theme', 'dark');
+            themeIcon.textContent = '☀️';
+            if (themeMobileIcon) themeMobileIcon.textContent = '☀️';
+        }
+    }
+    
+    // DETECTAR PREFERÊNCIA DE TEMA DO NAVEGADOR AO CARREGAR
+    window.addEventListener('load', () => {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        let initialTheme = 'light';
+        if (savedTheme) {
+            initialTheme = savedTheme;
+        } else if (prefersDark) {
+            initialTheme = 'dark';
+        }
+        
+        const body = document.body;
+        const header = document.getElementById('header');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeMobileIcon = document.getElementById('theme-icon-mobile');
+        
+        if (initialTheme === 'dark') {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            body.style.backgroundColor = '#1a1a2e';
+            header.style.backgroundColor = '#0f172a';
+            header.style.color = '#f3f4f6';
+            themeIcon.textContent = '☀️';
+            if (themeMobileIcon) themeMobileIcon.textContent = '☀️';
+        } else {
+            body.classList.add('light-mode');
+            body.style.backgroundColor = '#FEFDFB';
+            header.style.backgroundColor = '#FEFDFB';
+            header.style.color = '#1f2937';
+            themeIcon.textContent = '🌙';
+            if (themeMobileIcon) themeMobileIcon.textContent = '🌙';
+        }
+    });
+</script>
+
+</body>
+</html>
