@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>document.documentElement.classList.add('js');</script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -81,7 +82,6 @@
         body.dark-mode [class*="from-blue-50"],
         body.dark-mode [class*="from-green-50"],
         body.dark-mode [class*="from-red-50"],
-        body.dark-mode [class*="from-yellow-50"],
         body.dark-mode [class*="from-purple-50"],
         body.dark-mode [class*="from-indigo-50"],
         body.dark-mode [class*="from-pink-50"],
@@ -89,7 +89,6 @@
         body.dark-mode [class*="to-blue-50"],
         body.dark-mode [class*="to-green-50"],
         body.dark-mode [class*="to-red-50"],
-        body.dark-mode [class*="to-yellow-50"],
         body.dark-mode [class*="to-purple-50"],
         body.dark-mode [class*="to-indigo-50"],
         body.dark-mode [class*="to-pink-50"],
@@ -101,7 +100,6 @@
         body.dark-mode .feature-card,
         body.dark-mode .testimonial-card,
         body.dark-mode .contact-form,
-        body.dark-mode .pricing-toggle,
         body.dark-mode .chatbot-modal,
         body.dark-mode .chatbot-content,
         body.dark-mode .chatbot-options,
@@ -169,6 +167,15 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        #header .btn-primary {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff !important;
+        }
+
+        #header .btn-primary:hover {
             box-shadow: 0 15px 30px rgba(34, 197, 94, 0.3);
         }
 
@@ -409,6 +416,10 @@
             font-weight: 700;
             color: #22c55e;
         }
+
+        body.dark-mode .stat-number {
+            color: #86efac !important;
+        }
         
         .modal {
             display: none;
@@ -433,11 +444,11 @@
             right: 30px;
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%);
             border-radius: 50%;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -447,7 +458,7 @@
         
         .chatbot-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(34, 197, 94, 0.5);
+            box-shadow: 0 6px 30px rgba(15, 23, 42, 0.5);
         }
         
         .chatbot-button svg {
@@ -487,7 +498,7 @@
         }
         
         .chatbot-header {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%);
             color: white;
             padding: 16px;
             display: flex;
@@ -553,7 +564,7 @@
         }
         
         .chatbot-suggestion:hover {
-            background: #e0ffea;
+            background: #dcfce7;
             border-color: #22c55e;
             transform: translateX(2px);
         }
@@ -572,7 +583,422 @@
             font-size: 18px;
             padding: 0;
         }
-    
+
+        /* ===== Paleta global (verde + azul escuro) ===== */
+        :root {
+            --brand-dark: #1e3a5f;
+            --brand-dark-2: #16294a;
+            --brand-green: #16a34a;
+        }
+
+        body.dark-mode .text-green-600,
+        body.dark-mode .text-green-700 {
+            color: #86efac !important;
+        }
+
+        /* Depoimentos: círculos coloridos ficam visíveis também no tema escuro */
+        body.dark-mode .testimonial-avatar-green {
+            background-image: linear-gradient(135deg, #4ade80 0%, #16a34a 100%) !important;
+        }
+        body.dark-mode .testimonial-avatar-blue {
+            background-image: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%) !important;
+        }
+        body.dark-mode .testimonial-avatar-purple {
+            background-image: linear-gradient(135deg, #c084fc 0%, #7c3aed 100%) !important;
+        }
+
+        /* ===== Efeito de fade-in ao carregar a página ===== */
+        @keyframes pageFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        body {
+            animation: pageFadeIn 0.8s ease both;
+        }
+
+        /* Animações de entrada usadas no HTML */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-in { animation: fadeInUp 0.8s ease both; }
+        .animate-slide-left { animation: slideInLeft 0.8s ease both; }
+        .animate-slide-right { animation: slideInRight 0.8s ease both; }
+
+        /* Aparecer progressivamente a cada seção (conforme o scroll) */
+        .js section {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .js section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body, .animate-fade-in, .animate-slide-left, .animate-slide-right {
+                animation: none !important;
+            }
+            .animate-fade-in, .animate-slide-left, .animate-slide-right {
+                opacity: 1 !important;
+            }
+            .js section {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* ===== Carrossel genérico (blocos, estatísticas, depoimentos) ===== */
+        .carousel { position: relative; }
+        .carousel-viewport { overflow: hidden; }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .carousel-slide {
+            flex: 0 0 100%;
+            min-width: 0;
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 9999px;
+            border: none;
+            background: rgba(30, 58, 95, 0.92);
+            color: #ffffff;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+            transition: all 0.25s ease;
+        }
+        .carousel-arrow:hover {
+            background: #16a34a;
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.08);
+        }
+        .carousel-prev { left: 0; }
+        .carousel-next { right: 0; }
+        body.dark-mode .carousel-arrow {
+            background: rgba(34, 197, 94, 0.9);
+            color: #ffffff;
+        }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            border: none;
+            padding: 0;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .carousel-dot.active {
+            width: 24px;
+            background: #1e3a5f;
+        }
+        body.dark-mode .carousel-dot { background: #475569; }
+        body.dark-mode .carousel-dot.active { background: #4ade80; }
+
+        /* ===== Carrossel de imagens (Nossos serviços) ===== */
+        .img-carousel-slides {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(15, 23, 42, 0.2);
+        }
+        .img-carousel-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.04);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .img-carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== Vídeo do Pitch ===== */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #0f172a;
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.2);
+            cursor: pointer;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .video-poster {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.3), transparent 55%),
+                linear-gradient(135deg, rgba(30, 58, 95, 0.95) 0%, rgba(22, 41, 74, 0.96) 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 24px;
+            transition: opacity 0.3s ease;
+        }
+        .video-poster.hidden { opacity: 0; pointer-events: none; }
+        .video-play-btn {
+            width: 84px;
+            height: 84px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff;
+            border: none;
+            font-size: 34px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 6px;
+            box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.25), 0 18px 40px rgba(0, 0, 0, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .video-play-btn:hover { transform: scale(1.08); }
+        .video-poster-title { font-size: 1.25rem; font-weight: 700; }
+        .video-poster-sub { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); }
+
+        /* ===== Alternador Mensal/Anual dos planos ===== */
+        .plan-toggle-btn { transition: all 0.25s ease; }
+        .plan-toggle-btn.active {
+            background: #1e3a5f;
+            color: #ffffff;
+        }
+        body.dark-mode .plan-toggle-btn.active {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        /* ===== Links do header (hover + clique) ===== */
+        .nav-link {
+            position: relative;
+            color: #1f2937;
+            padding-bottom: 4px;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover {
+            color: #15803d;
+            transform: translateY(-1px);
+        }
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+        .nav-link:active {
+            animation: navClickPop 0.45s ease;
+            color: #16a34a;
+        }
+        @keyframes navClickPop {
+            0% { transform: scale(1); }
+            45% { transform: scale(0.88) translateY(0); }
+            100% { transform: scale(1); }
+        }
+        body.dark-mode .nav-link { color: #e2e8f0; }
+        body.dark-mode .nav-link:hover { color: #4ade80; }
+        body.dark-mode .nav-link:active { color: #22c55e; }
+
+        /* ===== Logo BrainCare: efeito ao clicar (recarregar) ===== */
+        .bc-letter {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        #braincare-logo:hover .bc-letter {
+            animation: bcLetterWave 0.5s ease;
+        }
+        #braincare-logo.is-bursting .bc-letter {
+            animation: bcBurst 0.7s ease forwards;
+        }
+        body.dark-mode #braincare-logo { color: #4ade80; }
+        @keyframes bcLetterWave {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(-6deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        @keyframes bcBurst {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(0.2); opacity: 0; }
+        }
+
+        /* ===== Foco nos campos do formulário (apenas anel verde) ===== */
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            outline: none;
+        }
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none !important;
+            border-color: #22c55e !important;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+        }
+
+        /* ===== Borda LED girando ao passar o mouse ===== */
+        @property --led-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+        .led-hover {
+            position: relative;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .led-hover::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 2px;
+            --led-angle: 0deg;
+            background: conic-gradient(from var(--led-angle), transparent 0deg, rgba(34, 197, 94, 0) 240deg, #22c55e 300deg, #4ade80 345deg, rgba(74, 222, 128, 0) 360deg);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            animation: led-rotate 2.2s linear infinite;
+            animation-play-state: paused;
+            pointer-events: none;
+            z-index: 3;
+        }
+        .led-hover:hover::after {
+            opacity: 1;
+            animation-play-state: running;
+        }
+        .led-hover:hover {
+            box-shadow: 0 0 28px rgba(34, 197, 94, 0.28);
+        }
+        .chatbot-button.led-hover {
+            position: fixed;
+        }
+        @keyframes led-rotate {
+            to { --led-angle: 360deg; }
+        }
+
+        /* ===== Título do hero: hover + efeito ao clicar ===== */
+        .hero-title {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .hero-title:hover {
+            transform: scale(1.02);
+        }
+        .hero-title:hover .hero-highlight {
+            background: linear-gradient(90deg, #16a34a, #4ade80, #22c55e, #16a34a);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: heroShimmer 1.4s linear infinite;
+        }
+        body.dark-mode .hero-title:hover .hero-highlight {
+            background: none !important;
+            color: #86efac !important;
+            -webkit-text-fill-color: #86efac !important;
+            animation: none !important;
+        }
+        @keyframes heroShimmer {
+            to { background-position: 200% 0; }
+        }
+        .hero-title.hero-pop {
+            animation: heroPop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        @keyframes heroPop {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.12); }
+            100% { transform: scale(1); }
+        }
+        .hero-particle {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 9999px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: heroParticleFly 0.85s ease-out forwards;
+        }
+        @keyframes heroParticleFly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx, 0), var(--ty, 0)) scale(0.3); opacity: 0; }
+        }
+
+        /* ===== Avatar robô do assistente ===== */
+        .chatbot-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35);
+        }
+        .chatbot-avatar svg {
+            width: 20px;
+            height: 20px;
+            color: #ffffff;
+        }
+
     </style>
 </head>
 <body class="light-mode bg-[#FEFDFB] text-gray-800">
@@ -581,17 +1007,19 @@
 <header class="fixed w-full shadow-md bg-[#FEFDFB] z-50" id="header">
     <nav class="container mx-auto flex justify-between items-center py-4 px-4 md:px-0 gap-4">
         <div class="flex items-center gap-2 shrink-0">
-            <span class="text-green-800 text-2xl font-bold tracking-tight">BrainCare</span>
+            <button type="button" id="braincare-logo" class="text-green-800 text-2xl font-bold tracking-tight cursor-pointer select-none" onclick="braincareLogoClick(this)" title="Clique para recarregar" aria-label="Recarregar site">
+                <span class="bc-letter">B</span><span class="bc-letter">r</span><span class="bc-letter">a</span><span class="bc-letter">i</span><span class="bc-letter">n</span><span class="bc-letter">C</span><span class="bc-letter">a</span><span class="bc-letter">r</span><span class="bc-letter">e</span>
+            </button>
         </div>
         
         <ul class="hidden lg:flex items-center gap-4 xl:gap-6 text-sm xl:text-base whitespace-nowrap">
-            <li><a href="#conformidade" class="hover:text-green-700 transition font-medium">Conformidade Legal</a></li>
-            <li><a href="#sobre" class="hover:text-green-700 transition font-medium">Quem Somos</a></li>
-            <li><a href="#servicos" class="hover:text-green-700 transition font-medium">Serviços</a></li>
-            <li><a href="#publico" class="hover:text-green-700 transition font-medium">Para Quem</a></li>
-            <li><a href="#importancia" class="hover:text-green-700 transition font-medium">Por Que Importa</a></li>
-            <li><a href="#planos" class="hover:text-green-700 transition font-medium">Planos</a></li>
-            <li><a href="#contato" class="hover:text-green-700 transition font-medium">Contato</a></li>
+            <li><a href="#conformidade" class="nav-link font-medium">Conformidade Legal</a></li>
+            <li><a href="#sobre" class="nav-link font-medium">Quem Somos</a></li>
+            <li><a href="#servicos" class="nav-link font-medium">Serviços</a></li>
+            <li><a href="#publico" class="nav-link font-medium">Para Quem</a></li>
+            <li><a href="#importancia" class="nav-link font-medium">Por Que Importa</a></li>
+            <li><a href="#planos" class="nav-link font-medium">Planos</a></li>
+            <li><a href="#contato" class="nav-link font-medium">Contato</a></li>
         </ul>
         
         <div class="flex items-center gap-2 sm:gap-3 md:gap-4 shrink-0">
@@ -607,7 +1035,7 @@
     </nav>
     <div class="theme-float">
         <span class="theme-switch-label">Tema</span>
-        <button class="theme-switch" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema">
+        <button class="theme-switch led-hover" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema">
             <span class="theme-switch-track"></span>
             <span class="theme-switch-thumb"></span>
             <span class="theme-switch-icon">☀️</span>
@@ -623,7 +1051,7 @@
                     <p class="text-sm font-semibold text-gray-900">Tema do site</p>
                     <p class="text-xs text-gray-500">Alterna entre claro e escuro</p>
                 </div>
-                <button class="theme-switch theme-switch--mobile" id="theme-toggle-mobile" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema">
+                <button class="theme-switch theme-switch--mobile led-hover" id="theme-toggle-mobile" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema">
                     <span class="theme-switch-track"></span>
                     <span class="theme-switch-thumb"></span>
                     <span class="theme-switch-icon">☀️</span>
@@ -656,7 +1084,7 @@
             <div class="mb-4 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
                 ✨ Bem-vindo à BrainCare
             </div>
-            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 id="hero-title" onclick="heroTitleBurst(event)" class="hero-title text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight cursor-pointer select-none">
                 Saúde Mental <span class="hero-highlight">Corporativa</span>
             </h1>
             <p class="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -677,6 +1105,37 @@
     </div>
 </section>
 
+<!-- ================================================================ -->
+<!-- SEÇÃO DO PITCH (VÍDEO)                                           -->
+<!-- COMO USAR:                                                       -->
+<!-- 1. Suba o vídeo no YouTube e copie o ID (a parte depois de       -->
+<!--    https://www.youtube.com/watch?v=... ).                        -->
+<!-- 2. Substitua "SEU_VIDEO_ID" no data-video-id abaixo.             -->
+<!-- 3. A capa (thumbnail) é gerada automaticamente a partir do ID.   -->
+<!-- ================================================================ -->
+<section id="pitch" class="py-20 bg-[#F9F5F0]">
+    <div class="container mx-auto px-4 md:px-0">
+        <div class="text-center mb-12 animate-fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span class="section-title">Conheça a BrainCare em 1 Minuto</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
+                Veja como ajudamos empresas a proteger a saúde mental dos colaboradores, em conformidade com as normas legais.
+            </p>
+        </div>
+
+        <div class="animate-fade-in" style="animation-delay: 0.15s;">
+            <div class="video-wrapper led-hover" data-video-id="SEU_VIDEO_ID">
+                <div class="video-poster">
+                    <button class="video-play-btn led-hover" type="button" aria-label="Assistir ao vídeo">▶</button>
+                    <p class="video-poster-title">Assista!</p>
+                    <p class="video-poster-sub">Clique para assistir ao vídeo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Seção: Conformidade Legal e Normas -->
 <section id="conformidade" class="py-20 bg-gradient-to-b from-[#F9F5F0] to-[#F3F0E8]">
     <div class="container mx-auto px-4 md:px-0">
@@ -691,7 +1150,7 @@
 
         <div class="grid md:grid-cols-2 gap-8 mb-12">
             <!-- Card 1: Normas Brasileiras -->
-            <div class="rounded-xl shadow-lg p-8 hover-scale animate-fade-in bg-gradient-to-br from-blue-50 to-blue-100" style="animation-delay: 0.1s;">
+            <div class="rounded-xl shadow-lg p-8 hover-scale led-hover animate-fade-in bg-gradient-to-br from-blue-50 to-blue-100" style="animation-delay: 0.1s;">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4">Normas Brasileiras</h3>
                 <ul class="text-gray-700 space-y-3">
                     <li class="flex items-start gap-3">
@@ -710,7 +1169,7 @@
             </div>
 
             <!-- Card 2: Consequências do Não Cumprimento -->
-            <div class="rounded-xl shadow-lg p-8 hover-scale animate-fade-in bg-gradient-to-br from-red-50 to-red-100" style="animation-delay: 0.2s;">
+            <div class="rounded-xl shadow-lg p-8 hover-scale led-hover animate-fade-in bg-gradient-to-br from-red-50 to-red-100" style="animation-delay: 0.2s;">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4">Riscos e Consequências</h3>
                 <ul class="text-gray-700 space-y-3">
                     <li class="flex items-start gap-3">
@@ -729,24 +1188,39 @@
             </div>
         </div>
 
-        <!-- Blocos informativos coloridos -->
-        <div class="grid md:grid-cols-3 gap-6 mt-12">
-            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 shadow-lg hover-scale animate-fade-in" style="animation-delay: 0.3s;">
-                <div class="text-4xl font-bold text-yellow-600 mb-3">85%</div>
-                <p class="text-gray-700 font-semibold">Das empresas precisam melhorar seus programas de saúde mental</p>
-                <p class="text-sm text-gray-600 mt-3">Conforme pesquisas de conformidade corporativa</p>
-            </div>
+        <!-- Blocos informativos coloridos (carrossel) -->
+        <div class="mt-12">
+            <div class="carousel" data-carousel>
+                <div class="carousel-viewport">
+                    <div class="carousel-track">
+                        <div class="carousel-slide px-2 sm:px-12">
+                            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-lg hover-scale led-hover h-full">
+                                <div class="text-4xl font-bold text-green-600 mb-3">85%</div>
+                                <p class="text-gray-700 font-semibold">Das empresas precisam melhorar seus programas de saúde mental</p>
+                                <p class="text-sm text-gray-600 mt-3">Conforme pesquisas de conformidade corporativa</p>
+                            </div>
+                        </div>
 
-            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-lg hover-scale animate-fade-in" style="animation-delay: 0.4s;">
-                <div class="text-4xl font-bold text-green-600 mb-3">100%</div>
-                <p class="text-gray-700 font-semibold">De conformidade com normas é nosso compromisso</p>
-                <p class="text-sm text-gray-600 mt-3">Atendemos todas as exigências legais federais</p>
-            </div>
+                        <div class="carousel-slide px-2 sm:px-12">
+                            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-lg hover-scale led-hover h-full">
+                                <div class="text-4xl font-bold text-green-600 mb-3">100%</div>
+                                <p class="text-gray-700 font-semibold">De conformidade com normas é nosso compromisso</p>
+                                <p class="text-sm text-gray-600 mt-3">Atendemos todas as exigências legais federais</p>
+                            </div>
+                        </div>
 
-            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 shadow-lg hover-scale animate-fade-in" style="animation-delay: 0.5s;">
-                <div class="text-4xl font-bold text-purple-600 mb-3">ROI+</div>
-                <p class="text-gray-700 font-semibold">Redução de custos com afastamentos</p>
-                <p class="text-sm text-gray-600 mt-3">Investimento em saúde mental se paga em menos de 1 ano</p>
+                        <div class="carousel-slide px-2 sm:px-12">
+                            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 shadow-lg hover-scale led-hover h-full">
+                                <div class="text-4xl font-bold text-purple-600 mb-3">ROI+</div>
+                                <p class="text-gray-700 font-semibold">Redução de custos com afastamentos</p>
+                                <p class="text-sm text-gray-600 mt-3">Investimento em saúde mental se paga em menos de 1 ano</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-arrow carousel-prev" type="button" aria-label="Anterior">‹</button>
+                <button class="carousel-arrow carousel-next" type="button" aria-label="Próximo">›</button>
+                <div class="carousel-dots"></div>
             </div>
         </div>
     </div>
@@ -765,7 +1239,7 @@
         </div>
         
         <div class="grid md:grid-cols-3 gap-12 mt-16">
-            <div class="feature-card rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.1s;">
                 <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
@@ -777,7 +1251,7 @@
                 </p>
             </div>
             
-            <div class="feature-card rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.2s;">
                 <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -789,7 +1263,7 @@
                 </p>
             </div>
             
-            <div class="feature-card rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.3s;">
+            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.3s;">
                 <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m7 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -821,7 +1295,7 @@
         
         <div class="grid md:grid-cols-2 gap-12 items-center mt-16">
             <div class="space-y-8 animate-slide-left">
-                <div class="feature-card rounded-xl p-6">
+                <div class="feature-card led-hover rounded-xl p-6">
                     <div class="flex gap-4">
                         <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <span class="text-2xl">🎯</span>
@@ -833,7 +1307,7 @@
                     </div>
                 </div>
                 
-                <div class="feature-card rounded-xl p-6">
+                <div class="feature-card led-hover rounded-xl p-6">
                     <div class="flex gap-4">
                         <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <span class="text-2xl">👥</span>
@@ -845,7 +1319,7 @@
                     </div>
                 </div>
                 
-                <div class="feature-card rounded-xl p-6">
+                <div class="feature-card led-hover rounded-xl p-6">
                     <div class="flex gap-4">
                         <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <span class="text-2xl">📋</span>
@@ -857,7 +1331,7 @@
                     </div>
                 </div>
                 
-                <div class="feature-card rounded-xl p-6">
+                <div class="feature-card led-hover rounded-xl p-6">
                     <div class="flex gap-4">
                         <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <span class="text-2xl">📊</span>
@@ -870,8 +1344,18 @@
                 </div>
             </div>
             
-            <div class="animate-slide-right">
-                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=600&fit=crop" alt="Sessão de Terapia" class="rounded-3xl shadow-2xl">
+            <!-- TEMPO: intervalo de troca das imagens, em milissegundos. Ex.: 4000 = a cada 4 segundos.
+                 Para mudar, altere data-autoplay abaixo (ex.: data-autoplay="5000"). -->
+            <!-- QUANTIDADE IMAGENS: 4 imagens no total. Para alterar a quantidade, adicione ou remova
+                 blocos <img class="img-carousel-slide"> abaixo (a contagem é feita automaticamente). -->
+            <div class="animate-slide-right" data-image-carousel data-autoplay="4000">
+                <div class="img-carousel-slides">
+                    <img class="img-carousel-slide active" src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=600&fit=crop" alt="Sessão de Terapia">
+                    <img class="img-carousel-slide" src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&h=600&fit=crop" alt="Atendimento psicológico individual">
+                    <img class="img-carousel-slide" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=600&fit=crop" alt="Equipe corporativa colaborando">
+                    <img class="img-carousel-slide" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=600&fit=crop" alt="Trabalho em equipe no escritório">
+                </div>
+                <div class="carousel-dots"></div>
             </div>
         </div>
     </div>
@@ -891,8 +1375,8 @@
         
         <div class="grid md:grid-cols-2 gap-8 mt-16">
             <!-- Card: Empresas -->
-            <div class="hover-scale group rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-green-200 animate-fade-in" style="animation-delay: 0.1s;">
-                <div class="h-48 bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center">
+            <div class="hover-scale group led-hover rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-blue-200 animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="h-48 bg-gradient-to-br from-[#1e3a5f] to-[#16294a] flex items-center justify-center">
                     <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5.581m0 0H9m0 0h5.581M9 3h6m0 0h3m-3 0V7m0 0h-3"></path>
                     </svg>
@@ -927,8 +1411,8 @@
             </div>
             
             <!-- Card: ROI -->
-            <div class="hover-scale group rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-green-100 animate-fade-in" style="animation-delay: 0.2s;">
-                <div class="h-48 bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
+            <div class="hover-scale group led-hover rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-blue-100 animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="h-48 bg-gradient-to-br from-[#2b4a73] to-[#1e3a5f] flex items-center justify-center">
                     <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6M3 7h8v8"></path>
                     </svg>
@@ -968,87 +1452,119 @@
 <!-- Seção: Por Que Importa -->
 <section id="importancia" class="py-20 bg-gradient-to-b from-[#F9F5F0] to-[#F9F5F0]">
     <div class="container mx-auto px-4 md:px-0">
-        <div class="text-center mb-16 animate-fade-in">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                <span class="section-title">Por Que Importa</span>
-            </h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
-                Saúde mental no trabalho é uma obrigação legal e um fator crítico para o sucesso empresarial. Organizações que investem em saúde mental reduzem custos e aumentam produtividade.
-            </p>
+        <div class="md:grid md:grid-cols-2 md:gap-14 lg:gap-20 items-center">
+            <div class="text-center md:text-left mb-14 md:mb-0 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <span class="section-title">Por Que Importa</span>
+                </h2>
+                <p class="text-xl text-gray-600 mt-8 leading-relaxed">
+                    Saúde mental no trabalho é uma obrigação legal e um fator crítico para o sucesso empresarial. Organizações que investem em saúde mental reduzem custos e aumentam produtividade.
+                </p>
+            </div>
+
+            <!-- Estatísticas (carrossel) -->
+            <div class="animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="carousel" data-carousel>
+                    <div class="carousel-viewport">
+                        <div class="carousel-track">
+                            <div class="carousel-slide px-2 sm:px-12">
+                                <div class="stat-item led-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg p-8 hover-scale h-full">
+                                    <div class="stat-number">12B</div>
+                                    <p class="text-gray-600 mt-2">Dias de trabalho perdidos por depressão e ansiedade</p>
+                                    <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">WHO: saúde mental no trabalho</a></p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-slide px-2 sm:px-12">
+                                <div class="stat-item led-hover bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-lg p-8 hover-scale h-full">
+                                    <div class="stat-number">15%</div>
+                                    <p class="text-gray-600 mt-2">Trabalhadores em idade ativa vivem com transtornos mentais</p>
+                                    <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/publications/i/item/9789240053052" target="_blank" class="text-blue-600 hover:underline">Diretrizes WHO para saúde mental no trabalho</a></p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-slide px-2 sm:px-12">
+                                <div class="stat-item led-hover bg-gradient-to-br from-red-50 to-red-100 rounded-xl shadow-lg p-8 hover-scale h-full">
+                                    <div class="stat-number">US$ 1 tri</div>
+                                    <p class="text-gray-600 mt-2">Custo anual de depressão e ansiedade em perda de produtividade</p>
+                                    <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">WHO: saúde mental no trabalho</a></p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-slide px-2 sm:px-12">
+                                <div class="stat-item led-hover bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-lg p-8 hover-scale h-full">
+                                    <div class="stat-number">1 em 3</div>
+                                    <p class="text-gray-600 mt-2">Somente 1 em 3 com depressão recebe tratamento em países de renda alta</p>
+                                    <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/depression" target="_blank" class="text-blue-600 hover:underline">WHO: depressão</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-prev" type="button" aria-label="Anterior">‹</button>
+                    <button class="carousel-arrow carousel-next" type="button" aria-label="Próximo">›</button>
+                    <div class="carousel-dots"></div>
+                </div>
+            </div>
         </div>
         
-        <!-- Estatísticas -->
-        <div class="stats-grid mt-16 mb-20 animate-fade-in" style="animation-delay: 0.1s;">
-            <div class="stat-item bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg p-8 hover-scale">
-                <div class="stat-number">12B</div>
-                <p class="text-gray-600 mt-2">Dias de trabalho perdidos por depressão e ansiedade</p>
-                <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">WHO: saúde mental no trabalho</a></p>
-            </div>
-            
-            <div class="stat-item bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl shadow-lg p-8 hover-scale" style="animation-delay: 0.1s;">
-                <div class="stat-number">15%</div>
-                <p class="text-gray-600 mt-2">Trabalhadores em idade ativa vivem com transtornos mentais</p>
-                <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/publications/i/item/9789240053052" target="_blank" class="text-blue-600 hover:underline">Diretrizes WHO para saúde mental no trabalho</a></p>
-            </div>
-            
-            <div class="stat-item bg-gradient-to-br from-red-50 to-red-100 rounded-xl shadow-lg p-8 hover-scale" style="animation-delay: 0.2s;">
-                <div class="stat-number">US$ 1 tri</div>
-                <p class="text-gray-600 mt-2">Custo anual de depressão e ansiedade em perda de produtividade</p>
-                <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">WHO: saúde mental no trabalho</a></p>
-            </div>
-            
-            <div class="stat-item bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-lg p-8 hover-scale" style="animation-delay: 0.3s;">
-                <div class="stat-number">1 em 3</div>
-                <p class="text-gray-600 mt-2">Somente 1 em 3 com depressão recebe tratamento em países de renda alta</p>
-                <p class="text-sm text-gray-500 mt-2"><a href="https://www.who.int/news-room/fact-sheets/detail/depression" target="_blank" class="text-blue-600 hover:underline">WHO: depressão</a></p>
-            </div>
-        </div>
-        
-        <!-- Depoimentos -->
-        <div>
+        <!-- Depoimentos (carrossel) -->
+        <div class="mt-20">
             <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">O Que Especialistas e Líderes Dizem</h3>
-            <div class="grid md:grid-cols-3 gap-8 animate-fade-in" style="animation-delay: 0.3s;">
-                <div class="testimonial-card p-8 hover-scale">
-                    <p class="text-gray-700 mb-4 italic">
-                        "É urgente que empresas ofereçam rotas anônimas para cuidar da saúde mental sem medo de retaliação. Essa abordagem preserva a confiança e reduz barreiras para buscar ajuda."
-                    </p>
-                    <div class="flex items-center gap-3 pt-4 border-t">
-                        <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full"></div>
-                        <div>
-                            <p class="font-semibold text-gray-900 text-sm">Dr. Ricardo Melo</p>
-                            <p class="text-xs text-gray-600">Especialista em Saúde Mental Corporativa</p>
+            <div class="carousel max-w-4xl mx-auto animate-fade-in" style="animation-delay: 0.3s;" data-carousel>
+                <div class="carousel-viewport">
+                    <div class="carousel-track">
+                        <div class="carousel-slide px-2 sm:px-12">
+                            <div class="testimonial-card led-hover p-8 hover-scale h-full">
+                                <p class="text-gray-700 mb-4 italic">
+                                    "É urgente que empresas ofereçam rotas anônimas para cuidar da saúde mental sem medo de retaliação. Essa abordagem preserva a confiança e reduz barreiras para buscar ajuda."
+                                </p>
+                                <div class="flex items-center gap-3 pt-4 border-t">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full testimonial-avatar-green"></div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900 text-sm">Dr. Ricardo Melo</p>
+                                        <p class="text-xs text-gray-600">Especialista em Saúde Mental Corporativa</p>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-3"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">Fonte: WHO - saúde mental no trabalho</a></p>
+                            </div>
+                        </div>
+
+                        <div class="carousel-slide px-2 sm:px-12">
+                            <div class="testimonial-card led-hover p-8 hover-scale h-full">
+                                <p class="text-gray-700 mb-4 italic">
+                                    "A melhor prevenção é oferecer uma orientação inicial clara e anônima. Assim, as pessoas podem confirmar suas dúvidas sem sofrer estigma ou pressão."
+                                </p>
+                                <div class="flex items-center gap-3 pt-4 border-t">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full testimonial-avatar-blue"></div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900 text-sm">Juliana Alves</p>
+                                        <p class="text-xs text-gray-600">Consultora de Bem-estar e RH</p>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-3"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">Fonte: WHO - saúde mental no trabalho</a></p>
+                            </div>
+                        </div>
+
+                        <div class="carousel-slide px-2 sm:px-12">
+                            <div class="testimonial-card led-hover p-8 hover-scale h-full">
+                                <p class="text-gray-700 mb-4 italic">
+                                    "Diagnóstico só deve ser feito por profissionais. Uma análise eletrônica anônima que indica o caminho certo é uma ferramenta poderosa para quem busca cuidado."
+                                </p>
+                                <div class="flex items-center gap-3 pt-4 border-t">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full testimonial-avatar-purple"></div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900 text-sm">Ana Paula Campos</p>
+                                        <p class="text-xs text-gray-600">Psicóloga e autora</p>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-3"><a href="https://www.psychiatry.org/patients-families/what-is-mental-illness" target="_blank" class="text-blue-600 hover:underline">Fonte: APA - diagnóstico e cuidado</a></p>
+                            </div>
                         </div>
                     </div>
-                    <p class="text-xs text-gray-500 mt-3"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">Fonte: WHO - saúde mental no trabalho</a></p>
                 </div>
-                
-                <div class="testimonial-card p-8 hover-scale" style="animation-delay: 0.1s;">
-                    <p class="text-gray-700 mb-4 italic">
-                        "A melhor prevenção é oferecer uma orientação inicial clara e anônima. Assim, as pessoas podem confirmar suas dúvidas sem sofrer estigma ou pressão."
-                    </p>
-                    <div class="flex items-center gap-3 pt-4 border-t">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full"></div>
-                        <div>
-                            <p class="font-semibold text-gray-900 text-sm">Juliana Alves</p>
-                            <p class="text-xs text-gray-600">Consultora de Bem-estar e RH</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-3"><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" class="text-blue-600 hover:underline">Fonte: WHO - saúde mental no trabalho</a></p>
-                </div>
-                
-                <div class="testimonial-card p-8 hover-scale" style="animation-delay: 0.2s;">
-                    <p class="text-gray-700 mb-4 italic">
-                        "Diagnóstico só deve ser feito por profissionais. Uma análise eletrônica anônima que indica o caminho certo é uma ferramenta poderosa para quem busca cuidado."
-                    </p>
-                    <div class="flex items-center gap-3 pt-4 border-t">
-                        <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full"></div>
-                        <div>
-                            <p class="font-semibold text-gray-900 text-sm">Ana Paula Campos</p>
-                            <p class="text-xs text-gray-600">Psicóloga e autora</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-3"><a href="https://www.psychiatry.org/patients-families/what-is-mental-illness" target="_blank" class="text-blue-600 hover:underline">Fonte: APA - diagnóstico e cuidado</a></p>
-                </div>
+                <button class="carousel-arrow carousel-prev" type="button" aria-label="Anterior">‹</button>
+                <button class="carousel-arrow carousel-next" type="button" aria-label="Próximo">›</button>
+                <div class="carousel-dots"></div>
             </div>
         </div>
     </div>
@@ -1062,24 +1578,24 @@
                 <span class="section-title">Planos Corporativos</span>
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
-                Uma jornada clara: teste rápido no mensal, economize no anual e feche com o corporativo quando a empresa precisar de uma solução sob medida.
+                Escolha o porte da sua equipe e o período de cobrança: pague por pessoa no mensal ou economize 20% no anual, e feche com uma proposta sob medida.
             </p>
         </div>
 
         <div class="max-w-5xl mx-auto mb-10 animate-fade-in" style="animation-delay: 0.1s;">
-            <div class="rounded-3xl bg-green-900 text-white p-6 md:p-8 shadow-2xl">
+            <div class="rounded-3xl bg-[#1e3a5f] text-white p-6 md:p-8 shadow-2xl">
                 <div class="grid md:grid-cols-3 gap-6">
                     <div>
-                        <p class="text-green-200 text-sm font-semibold mb-1">1. Comece sem risco</p>
-                        <p class="text-lg font-bold">Plano Mensal para testar a experiência e validar o serviço.</p>
+                        <p class="text-green-200 text-sm font-semibold mb-1">1. Escolha o porte</p>
+                        <p class="text-lg font-bold">Selecione o plano do tamanho da sua equipe: até 50, 51-500 ou 500+ colaboradores.</p>
                     </div>
                     <div>
-                        <p class="text-green-200 text-sm font-semibold mb-1">2. Melhor custo-benefício</p>
-                        <p class="text-lg font-bold">Plano Anual para consolidar o uso com desconto maior.</p>
+                        <p class="text-green-200 text-sm font-semibold mb-1">2. Mensal ou Anual</p>
+                        <p class="text-lg font-bold">Cobrança por pessoa com desconto de 20% ao optar pela periodicidade anual.</p>
                     </div>
                     <div>
-                        <p class="text-green-200 text-sm font-semibold mb-1">3. Fechamento com a empresa</p>
-                        <p class="text-lg font-bold">Plano Corporativo para escalar e adaptar ao porte da equipe.</p>
+                        <p class="text-green-200 text-sm font-semibold mb-1">3. Solicite proposta</p>
+                        <p class="text-lg font-bold">Feche com a BrainCare e coloque a conformidade legal em prática.</p>
                     </div>
                 </div>
             </div>
@@ -1088,27 +1604,38 @@
         <!-- Planos Corporativos -->
         <div class="max-w-5xl mx-auto">
             <div class="grid md:grid-cols-3 gap-6 mb-8 animate-fade-in" style="animation-delay: 0.2s;">
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border-2 border-blue-200 hover-scale h-full flex flex-col">
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border-2 border-blue-200 hover-scale led-hover h-full flex flex-col" data-plan-card>
                     <div class="inline-flex items-center self-start mb-4 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">Entrada rápida</div>
                     <h4 class="font-bold text-gray-900 mb-2 text-xl">Pequenas Empresas</h4>
                     <p class="text-gray-600 mb-4">Ideal para validar o serviço com uma equipe menor.</p>
                     <p class="text-3xl font-bold text-blue-600 mb-2">Até 50</p>
                     <p class="text-sm text-gray-600 mb-6">colaboradores</p>
-                    <div class="mt-auto">
-                        <p class="text-2xl font-bold text-gray-900 mb-4">R$ 59<span class="text-lg text-gray-600 font-normal">/pessoa</span></p>
-                        <ul class="space-y-3 text-sm text-gray-700 mb-6">
-                            <li>✓ Avaliações anônimas</li>
-                            <li>✓ 1 Profissional dedicado</li>
-                            <li>✓ Relatórios mensais</li>
-                            <li>✓ Conformidade legal</li>
-                        </ul>
-                        <button onclick="scrollToContact()" class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
-                            Quero este plano
-                        </button>
+                    <div class="inline-flex bg-white/70 border border-blue-200 rounded-full p-1 text-xs font-semibold mb-3 self-start" data-plan-toggle>
+                        <button type="button" data-period="monthly" class="plan-toggle-btn active px-3 py-1 rounded-full">Mensal</button>
+                        <button type="button" data-period="annual" class="plan-toggle-btn px-3 py-1 rounded-full text-gray-600">Anual</button>
                     </div>
+                    <div class="mb-1">
+                        <p class="text-2xl font-bold text-gray-900">
+                            <span class="plan-price" data-price="monthly">R$ 49</span>
+                            <span class="plan-price hidden" data-price="annual">R$ 39</span>
+                            <span class="text-lg text-gray-600 font-normal">/pessoa</span>
+                        </p>
+                    </div>
+                    <div class="min-h-[3rem]">
+                        <p class="text-sm font-semibold text-green-600 hidden" data-save-annual>Anual: economize R$ 120 por pessoa ao ano (20% de desconto)</p>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-700 mb-6">
+                        <li>✓ Avaliações anônimas</li>
+                        <li>✓ 1 Profissional dedicado</li>
+                        <li>✓ Relatórios mensais</li>
+                        <li>✓ Conformidade legal</li>
+                    </ul>
+                    <button onclick="scrollToContact()" class="mt-auto w-full btn-primary text-white py-3 rounded-lg font-semibold">
+                        Quero este plano
+                    </button>
                 </div>
                 
-                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl border-4 border-green-400 hover-scale relative h-full flex flex-col shadow-xl">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl border-4 border-green-400 hover-scale led-hover relative h-full flex flex-col shadow-xl" data-plan-card>
                     <div class="absolute -top-4 left-4 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold">
                         MAIS POPULAR
                     </div>
@@ -1117,172 +1644,54 @@
                     <p class="text-gray-600 mb-4">Bom equilíbrio entre preço, suporte e escala.</p>
                     <p class="text-3xl font-bold text-green-600 mb-2">51 - 500</p>
                     <p class="text-sm text-gray-600 mb-6">colaboradores</p>
-                    <div class="mt-auto">
-                        <p class="text-2xl font-bold text-gray-900 mb-4">R$ 39<span class="text-lg text-gray-600 font-normal">/pessoa</span></p>
-                        <ul class="space-y-3 text-sm text-gray-700 mb-6">
-                            <li>✓ Avaliações anônimas</li>
-                            <li>✓ 2-3 Profissionais</li>
-                            <li>✓ Relatórios semanais</li>
-                            <li>✓ Workshops corporativos</li>
-                            <li>✓ Plano customizado</li>
-                        </ul>
-                        <button onclick="scrollToContact()" class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
-                            Solicitar proposta
-                        </button>
+                    <div class="inline-flex bg-white/70 border border-green-300 rounded-full p-1 text-xs font-semibold mb-3 self-start" data-plan-toggle>
+                        <button type="button" data-period="monthly" class="plan-toggle-btn active px-3 py-1 rounded-full">Mensal</button>
+                        <button type="button" data-period="annual" class="plan-toggle-btn px-3 py-1 rounded-full text-gray-600">Anual</button>
                     </div>
+                    <div class="mb-1">
+                        <p class="text-2xl font-bold text-gray-900">
+                            <span class="plan-price" data-price="monthly">R$ 29</span>
+                            <span class="plan-price hidden" data-price="annual">R$ 23</span>
+                            <span class="text-lg text-gray-600 font-normal">/pessoa</span>
+                        </p>
+                    </div>
+                    <div class="min-h-[3rem]">
+                        <p class="text-sm font-semibold text-green-600 hidden" data-save-annual>Anual: economize R$ 72 por pessoa ao ano (20% de desconto)</p>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-700 mb-6">
+                        <li>✓ Avaliações anônimas</li>
+                        <li>✓ 2-3 Profissionais</li>
+                        <li>✓ Relatórios semanais</li>
+                        <li>✓ Workshops corporativos</li>
+                        <li>✓ Plano customizado</li>
+                    </ul>
+                    <button onclick="scrollToContact()" class="mt-auto w-full btn-primary text-white py-3 rounded-lg font-semibold">
+                        Solicitar proposta
+                    </button>
                 </div>
                 
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl border-2 border-purple-200 hover-scale h-full flex flex-col">
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl border-2 border-purple-200 hover-scale led-hover h-full flex flex-col" data-plan-card>
                     <div class="inline-flex items-center self-start mb-4 bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">Sob medida</div>
                     <h4 class="font-bold text-gray-900 mb-2 text-xl">Grandes Empresas</h4>
                     <p class="text-gray-600 mb-4">Pensado para empresas que precisam adaptar a solução ao processo interno.</p>
                     <p class="text-3xl font-bold text-purple-600 mb-2">500+</p>
                     <p class="text-sm text-gray-600 mb-6">colaboradores</p>
-                    <div class="mt-auto">
-                        <p class="text-lg font-bold text-gray-900 mb-4">Totalmente<br/>Customizado</p>
-                        <ul class="space-y-3 text-sm text-gray-700 mb-6">
-                            <li>✓ Solução white-label</li>
-                            <li>✓ Equipe dedicada</li>
-                            <li>✓ Integração sistemas</li>
-                            <li>✓ Consultoria estratégica</li>
-                        </ul>
-                        <button onclick="scrollToContact()" class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
-                            Falar com Vendas
-                        </button>
+                    <div class="inline-flex bg-white/70 border border-purple-200 rounded-full p-1 text-xs font-semibold mb-3 self-start" data-plan-toggle>
+                        <button type="button" data-period="monthly" class="plan-toggle-btn active px-3 py-1 rounded-full">Mensal</button>
+                        <button type="button" data-period="annual" class="plan-toggle-btn px-3 py-1 rounded-full text-gray-600">Anual</button>
                     </div>
-                </div>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
-                <!-- Plano Mensal Individual -->
-                <div class="hover-scale rounded-2xl shadow-lg p-8 bg-[#F9F5F0] border-2 border-transparent hover:border-green-200 h-full flex flex-col">
-                    <div class="mb-2 inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">
-                        Para testar
+                    <div class="mb-1">
+                        <p class="text-lg font-bold text-gray-900">Totalmente<br/>Customizado</p>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-4">Plano Mensal</h3>
-                    <p class="text-5xl font-bold text-green-600 mb-2">R$ 29,99<span class="text-base text-gray-600 font-normal">/mês</span></p>
-                    <p class="text-gray-600 mb-8">Ótimo para conhecer o serviço e seguir sem compromisso longo.</p>
-                    
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Questionários anônimos</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Análise anônima com recomendação</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Relatório de próximos passos</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Privacidade e segurança garantidas</span>
-                        </li>
+                    <div class="min-h-[3rem]"></div>
+                    <ul class="space-y-3 text-sm text-gray-700 mb-6">
+                        <li>✓ Solução white-label</li>
+                        <li>✓ Equipe dedicada</li>
+                        <li>✓ Integração sistemas</li>
+                        <li>✓ Consultoria estratégica</li>
                     </ul>
-                    
-                    <button onclick="openModal('monthly')" class="mt-auto w-full btn-primary text-white py-3 rounded-lg font-semibold">
-                        Começar Agora
-                    </button>
-                </div>
-                
-                <!-- Plano Anual Individual -->
-                <div class="hover-scale rounded-2xl shadow-lg p-8 bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200 relative">
-                    <div class="absolute top-6 right-6 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">
-                        MELHOR VALOR
-                    </div>
-                    <div class="mb-2 inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
-                        Economia
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-4">Plano Anual</h3>
-                    <p class="text-5xl font-bold text-green-600 mb-2">R$ 279,99<span class="text-base text-gray-600 font-normal">/ano</span></p>
-                    <p class="text-green-700 font-semibold mb-8">Economize R$ 79,89 (22% de desconto)</p>
-                    
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Questionários anônimos</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Recomendações ajustadas ao seu caso</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Guia de confirmação e encaminhamento</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Apoio para decidir seu próximo passo</span>
-                        </li>
-                    </ul>
-                    
-                    <button onclick="openModal('annual')" class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
-                        Assinar Agora
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Planos Corporativos -->
-        <div id="corporate-tab" class="pricing-content hidden">
-            <div class="max-w-4xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
-                <div class="rounded-2xl shadow-lg p-12 bg-[#F9F5F0] border-2 border-blue-200">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Planos Corporativos</h3>
-                    <p class="text-xl text-gray-600 mb-8">
-                        Soluções personalizadas para sua empresa. Cada organização é única, por isso nossos planos são customizáveis.
-                    </p>
-                    
-                    <div class="grid md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl">
-                            <h4 class="font-bold text-gray-900 mb-2">Até 50 colaboradores</h4>
-                            <p class="text-3xl font-bold text-blue-600 mb-4">A partir de</p>
-                            <p class="text-2xl font-bold text-gray-900">R$ 59/pessoa</p>
-                        </div>
-                        
-                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-2 border-green-200">
-                            <h4 class="font-bold text-gray-900 mb-2">51 a 500 colaboradores</h4>
-                            <p class="text-3xl font-bold text-green-600 mb-4">A partir de</p>
-                            <p class="text-2xl font-bold text-gray-900">R$ 39/pessoa</p>
-                        </div>
-                        
-                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl">
-                            <h4 class="font-bold text-gray-900 mb-2">500+ colaboradores</h4>
-                            <p class="text-3xl font-bold text-purple-600 mb-4">Customizado</p>
-                            <p class="text-gray-600">Entre em contato conosco</p>
-                        </div>
-                    </div>
-                    
-                    <h4 class="text-xl font-bold text-gray-900 mb-6">Incluso em todos os planos:</h4>
-                    <div class="grid md:grid-cols-2 gap-4 mb-10">
-                        <div class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Avaliações anônimas para colaboradores</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Relatórios agregados de bem-estar</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Indicação de como apoiar sua equipe</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Guias e materiais de prevenção</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Apoio para implementar ações de cuidado</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            <span class="text-gray-700">Plano de orientação corporativa personalizável</span>
-                        </div>
-                    </div>
-                    
-                    <button onclick="scrollToContact()" class="w-full btn-primary text-white py-4 rounded-lg font-semibold text-lg">
-                        Solicitar Proposta Personalizada
+                    <button onclick="scrollToContact()" class="mt-auto w-full btn-primary text-white py-3 rounded-lg font-semibold">
+                        Falar com Vendas
                     </button>
                 </div>
             </div>
@@ -1348,17 +1757,17 @@
             <div class="contact-form p-10 animate-slide-right">
                 <form onsubmit="handleFormSubmit(event)">
                     <div class="mb-6">
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">Seu Nome *</label>
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Seu Nome <span class="text-red-500">*</span></label>
                         <input type="text" required placeholder="Digite seu nome" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
                     </div>
                     
                     <div class="mb-6">
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">Email *</label>
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Email <span class="text-red-500">*</span></label>
                         <input type="email" required placeholder="seu@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
                     </div>
                     
                     <div class="mb-6">
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">Tipo de Interesse *</label>
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Tipo de Interesse <span class="text-red-500">*</span></label>
                         <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
                             <option value="">Selecione uma opção</option>
                             <option value="individual">Plano Individual</option>
@@ -1369,13 +1778,25 @@
                     </div>
                     
                     <div class="mb-6">
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">Telefone</label>
-                        <input type="tel" placeholder="(11) 99999-9999" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Período do Plano <span class="text-red-500">*</span></label>
+                        <select required id="contact-plan-period" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                            <option value="">Selecione o período</option>
+                            <option value="monthly">Mensal</option>
+                            <option value="annual">Anual</option>
+                        </select>
                     </div>
                     
                     <div class="mb-6">
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">Mensagem *</label>
-                        <textarea required placeholder="Conte-nos mais sobre suas necessidades..." rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"></textarea>
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">Telefone</label>
+                        <input type="tel" placeholder="(11) 99999-9999" maxlength="15" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="block text-sm font-semibold text-gray-900">Mensagem <span class="text-red-500">*</span></label>
+                            <span class="text-xs text-gray-400"><span id="msg-count">0</span>/1000</span>
+                        </div>
+                        <textarea required placeholder="Conte-nos mais sobre suas necessidades..." rows="5" maxlength="1000" oninput="document.getElementById('msg-count').textContent = this.value.length" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"></textarea>
                     </div>
                     
                     <div class="mb-6">
@@ -1421,47 +1842,20 @@
             <div>
                 <h4 class="font-bold mb-4">Redes</h4>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-white transition">Instagram</a></li>
-                    <li><a href="#" class="hover:text-white transition">TikTok</a></li>
+                    <li><a href="https://www.instagram.com/braincareofc/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@braincareofc?lang=pt-BR" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">TikTok</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="border-t border-gray-800 pt-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400">© 2026 BrainCare. Todos os direitos reservados.</p>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white transition">Instagram</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">TikTok</a>
-                </div>
-            </div>
+            <p class="text-gray-400">© 2026 BrainCare. Todos os direitos reservados.</p>
         </div>
     </div>
 </footer>
 
-<!-- Modal de Confirmação -->
-<div id="modal" class="modal">
-    <div class="bg-[#F9F5F0] rounded-2xl shadow-2xl max-w-md w-11/12 p-8 animate-fade-in">
-        <button onclick="closeModal()" class="float-right text-gray-500 hover:text-gray-700">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Próximo Passo</h3>
-        <p id="modal-text" class="text-gray-600 mb-6"></p>
-        <div class="space-y-3">
-            <button onclick="closeModal()" class="w-full btn-primary text-white py-2 rounded-lg font-semibold">
-                Ir para Formulário
-            </button>
-            <button onclick="closeModal()" class="w-full border-2 border-gray-300 text-gray-900 py-2 rounded-lg font-semibold hover:bg-gray-50 transition">
-                Fechar
-            </button>
-        </div>
-    </div>
-</div>
-
 <!-- Chatbot Widget -->
-<button class="chatbot-button" onclick="toggleChatbot()" title="Chat BrainCare">
+<button class="chatbot-button led-hover" onclick="toggleChatbot()" title="Chat BrainCare">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
     </svg>
@@ -1469,13 +1863,22 @@
 
 <div id="chatbot-modal" class="chatbot-modal">
     <div class="chatbot-header">
-        <h3 class="font-semibold">BrainCare Assistente</h3>
+        <div class="flex items-center gap-3">
+            <span class="chatbot-avatar" aria-hidden="true">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2.5a1.5 1.5 0 0 1 1.5 1.5v1.14A4.51 4.51 0 0 1 17 9v5.7c0 .9-.33 1.73-.88 2.38l1.5 1.9a.75.75 0 0 1-1.18.92l-1.35-1.7c-.28.1-.58.16-.9.16H10.8c-.32 0-.62-.06-.9-.16l-1.36 1.7a.75.75 0 1 1-1.18-.92l1.5-1.9A3.72 3.72 0 0 1 8 14.7V9a4.51 4.51 0 0 1 3.5-4.36V4A1.5 1.5 0 0 1 12 2.5Z"></path>
+                    <circle cx="9.4" cy="11.5" r="1.15" fill="#1e3a5f"></circle>
+                    <circle cx="14.6" cy="11.5" r="1.15" fill="#1e3a5f"></circle>
+                </svg>
+            </span>
+            <h3 class="font-semibold">BrainCare Assistente</h3>
+        </div>
         <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
     </div>
     <div class="chatbot-content" id="chatbot-content"></div>
     <div class="chatbot-input-area" id="chatbot-input-area">
         <input type="text" id="chatbot-input" placeholder="Digite sua pergunta..." class="chatbot-input w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500" onkeypress="if(event.key === 'Enter') sendChatbotMessage()">
-        <button onclick="sendChatbotMessage()" class="w-full mt-2 bg-green-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-green-700 transition">Enviar</button>
+        <button onclick="sendChatbotMessage()" class="w-full mt-2 bg-green-500 text-white py-2 rounded-lg text-sm font-semibold hover:bg-green-600 transition">Enviar</button>
     </div>
 </div>
 
@@ -1504,7 +1907,7 @@
         const bubble = document.createElement('div');
         bubble.className = role === 'bot' ? `bot-message ${extraClass}` : '';
         bubble.style.cssText = role === 'user'
-            ? 'background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; padding: 10px 14px; border-radius: 14px; text-align: left; font-size: 14px; margin-left: 44px; margin-right: 0; width: fit-content; max-width: calc(100% - 44px); white-space: pre-line;'
+            ? 'background: linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%); color: white; padding: 10px 14px; border-radius: 14px; text-align: left; font-size: 14px; margin-left: 44px; margin-right: 0; width: fit-content; max-width: calc(100% - 44px); white-space: pre-line;'
             : 'white-space: pre-line;';
         bubble.textContent = text;
 
@@ -1635,7 +2038,7 @@
 
             return {
                 topic: 'pricing',
-                reply: 'Os planos principais são:\n\n• Até 50 colaboradores: R$ 59 por pessoa\n• De 51 a 500 colaboradores: R$ 39 por pessoa\n• 500+ colaboradores: proposta customizada\n\nPosso também comparar mensal x anual, se a sua dúvida for sobre economia.'
+                reply: 'Os planos principais são:\n\n• Até 50 colaboradores: R$ 49 por pessoa (mensal)\n• De 51 a 500 colaboradores: R$ 29 por pessoa (mensal)\n• 500+ colaboradores: proposta customizada\n\nNo plano anual, cada plano sai por pessoa/mês com 20% de desconto (ex.: R$ 39 e R$ 23). Posso comparar melhor se você quiser.'
             };
         }
 
@@ -1715,37 +2118,51 @@
         sendChatbotMessage();
     }
 
-    function showTab(tab, evt) {
-        document.querySelectorAll('.pricing-content').forEach(el => el.classList.add('hidden'));
-        const target = document.getElementById(tab + '-tab');
-        if (target) target.classList.remove('hidden');
-
-        if (evt && evt.target) {
-            document.querySelectorAll('.pricing-toggle button').forEach(btn => btn.classList.remove('active'));
-            evt.target.classList.add('active');
-        }
-    }
-
     function scrollToContact() {
         document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function openModal(plan) {
-        const modal = document.getElementById('modal');
-        const text = document.getElementById('modal-text');
-
-        if (plan === 'monthly') {
-            text.textContent = 'Você selecionou o Plano Mensal (R$ 29,99/mês). Preencha o formulário de contato abaixo para completar sua inscrição!';
-        } else if (plan === 'annual') {
-            text.textContent = 'Você selecionou o Plano Anual (R$ 279,99/ano). Aproveite 22% de economia! Preencha o formulário para começar.';
-        }
-
-        modal.classList.add('active');
-        scrollToContact();
+    function braincareLogoClick(logo) {
+        if (logo.dataset.bursting === 'true') return;
+        logo.dataset.bursting = 'true';
+        const letters = logo.querySelectorAll('.bc-letter');
+        letters.forEach(function (l, i) {
+            const angle = (i / letters.length) * Math.PI * 2;
+            const dist = 45 + (i % 3) * 20;
+            l.style.setProperty('--tx', Math.round(Math.cos(angle) * dist) + 'px');
+            l.style.setProperty('--ty', Math.round(Math.sin(angle) * dist) + 'px');
+            l.style.setProperty('--rot', ((i % 2 === 0 ? 1 : -1) * (60 + i * 25)) + 'deg');
+            l.style.animationDelay = (i * 0.03) + 's';
+        });
+        logo.classList.add('is-bursting');
+        setTimeout(function () { location.reload(); }, 850);
     }
 
-    function closeModal() {
-        document.getElementById('modal').classList.remove('active');
+    function heroTitleBurst(event) {
+        const el = document.getElementById('hero-title');
+        if (!el) return;
+        if (event && event.cancelable) event.preventDefault();
+        const rect = el.getBoundingClientRect();
+        const cx = event && event.clientX ? event.clientX : rect.left + rect.width / 2;
+        const cy = event && event.clientY ? event.clientY : rect.top + rect.height / 2;
+        const colors = ['#22c55e', '#16a34a', '#4ade80', '#ffffff', '#1e3a5f'];
+        const count = 18;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('span');
+            p.className = 'hero-particle';
+            p.style.background = colors[i % colors.length];
+            const angle = (i / count) * Math.PI * 2 + Math.random() * 0.5;
+            const dist = 45 + Math.random() * 70;
+            p.style.left = cx + 'px';
+            p.style.top = cy + 'px';
+            p.style.setProperty('--tx', Math.round(Math.cos(angle) * dist) + 'px');
+            p.style.setProperty('--ty', Math.round(Math.sin(angle) * dist) + 'px');
+            document.body.appendChild(p);
+            setTimeout(function () { p.remove(); }, 900);
+        }
+        el.classList.remove('hero-pop');
+        void el.offsetWidth;
+        el.classList.add('hero-pop');
     }
 
     function toggleMobileMenu() {
@@ -1819,6 +2236,187 @@
 
         setThemeMode(initialTheme === 'dark');
         initializeChatbot();
+    });
+
+    /* ===== Carrossel de blocos / estatísticas / depoimentos ===== */
+    function initCarousels() {
+        document.querySelectorAll('[data-carousel]').forEach(function (el) {
+            const track = el.querySelector('.carousel-track');
+            const slides = el.querySelectorAll('.carousel-slide');
+            const dotsContainer = el.querySelector('.carousel-dots');
+            if (!track || slides.length === 0) return;
+
+            let index = 0;
+            let timer = null;
+            const autoplay = parseInt(el.dataset.autoplay || '0', 10);
+
+            if (dotsContainer) {
+                slides.forEach(function (_, i) {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Ir para o item ' + (i + 1));
+                    dot.addEventListener('click', function () {
+                        go(i, true);
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+            }
+            const dots = dotsContainer ? dotsContainer.querySelectorAll('.carousel-dot') : [];
+
+            function go(i, manual) {
+                index = (i + slides.length) % slides.length;
+                track.style.transform = 'translateX(-' + index * 100 + '%)';
+                dots.forEach(function (d, j) {
+                    d.classList.toggle('active', j === index);
+                });
+                if (manual && autoplay) restart();
+            }
+
+            function nextSlide() { go(index + 1); }
+            function prevSlide() { go(index - 1); }
+
+            function stop() { if (timer) clearInterval(timer); }
+            function restart() {
+                stop();
+                if (autoplay) timer = setInterval(nextSlide, autoplay);
+            }
+
+            const prev = el.querySelector('.carousel-prev');
+            const next = el.querySelector('.carousel-next');
+            if (prev) prev.addEventListener('click', function () { stop(); prevSlide(); });
+            if (next) next.addEventListener('click', function () { stop(); nextSlide(); });
+            el.addEventListener('mouseenter', stop);
+            el.addEventListener('mouseleave', restart);
+            restart();
+        });
+    }
+
+    /* ===== Carrossel de imagens (Nossos serviços) ===== */
+    function initImageCarousel() {
+        document.querySelectorAll('[data-image-carousel]').forEach(function (el) {
+            const slides = el.querySelectorAll('.img-carousel-slide');
+            const dotsContainer = el.querySelector('.carousel-dots');
+            if (slides.length === 0) return;
+
+            let index = 0;
+            let timer = null;
+            const autoplay = parseInt(el.dataset.autoplay || '4000', 10);
+
+            if (dotsContainer) {
+                slides.forEach(function (_, i) {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Ver imagem ' + (i + 1));
+                    dot.addEventListener('click', function () {
+                        show(i, true);
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+            }
+            const dots = dotsContainer ? dotsContainer.querySelectorAll('.carousel-dot') : [];
+
+            function show(i, manual) {
+                index = (i + slides.length) % slides.length;
+                slides.forEach(function (s, j) {
+                    s.classList.toggle('active', j === index);
+                });
+                dots.forEach(function (d, j) {
+                    d.classList.toggle('active', j === index);
+                });
+                if (manual && autoplay) restart();
+            }
+
+            function nextSlide() { show(index + 1); }
+            function stop() { if (timer) clearInterval(timer); }
+            function restart() {
+                stop();
+                if (autoplay) timer = setInterval(nextSlide, autoplay);
+            }
+
+            el.addEventListener('mouseenter', stop);
+            el.addEventListener('mouseleave', restart);
+            restart();
+        });
+    }
+
+    /* ===== Alternar Mensal/Anual nos planos ===== */
+    function initPlanToggles() {
+        document.querySelectorAll('[data-plan-toggle]').forEach(function (toggle) {
+            const card = toggle.closest('[data-plan-card]');
+            toggle.querySelectorAll('.plan-toggle-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const period = btn.dataset.period;
+                    toggle.querySelectorAll('.plan-toggle-btn').forEach(function (b) {
+                        b.classList.toggle('active', b === btn);
+                    });
+                    if (!card) return;
+                    card.querySelectorAll('.plan-price').forEach(function (p) {
+                        p.classList.toggle('hidden', p.dataset.price !== period);
+                    });
+                    const save = card.querySelector('[data-save-annual]');
+                    if (save) save.classList.toggle('hidden', period !== 'annual');
+                });
+            });
+        });
+    }
+
+    /* ===== Aparecer progressivamente a cada seção (conforme o scroll, sempre) ===== */
+    function initScrollReveal() {
+        const sections = document.querySelectorAll('section');
+        if (!sections.length) return;
+        if (!('IntersectionObserver' in window)) {
+            sections.forEach(function (s) { s.classList.add('is-visible'); });
+            return;
+        }
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        sections.forEach(function (s) { observer.observe(s); });
+    }
+
+    /* ===== Vídeo do Pitch (player só carrega ao clicar) ===== */
+    function initPitchVideo() {
+        const wrapper = document.querySelector('[data-video-id]');
+        if (!wrapper) return;
+        const videoId = wrapper.dataset.videoId;
+        const poster = wrapper.querySelector('.video-poster');
+        if (!poster) return;
+
+        if (videoId && videoId !== 'SEU_VIDEO_ID') {
+            poster.style.backgroundImage =
+                'linear-gradient(rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.35)), url(https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg)';
+            poster.style.backgroundSize = 'cover';
+            poster.style.backgroundPosition = 'center';
+        }
+
+        wrapper.addEventListener('click', function () {
+            if (wrapper.querySelector('iframe')) return;
+            if (!videoId || videoId === 'SEU_VIDEO_ID') return;
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?rel=0&modestbranding=1&autoplay=1';
+            iframe.title = 'Pitch BrainCare';
+            iframe.loading = 'lazy';
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', '');
+            wrapper.appendChild(iframe);
+            if (poster) poster.classList.add('hidden');
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initCarousels();
+        initImageCarousel();
+        initPlanToggles();
+        initScrollReveal();
+        initPitchVideo();
     });
 </script>
 
