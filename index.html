@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainCare - Saúde Mental Corporativa B2B</title>
+    <title>Here 4 Life - Saúde Mental Corporativa B2B</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
         }
         body {
             font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
             transition: background-color 0.3s, color 0.3s;
         }
         
@@ -657,11 +658,27 @@
             from { opacity: 0; transform: translateX(30px); }
             to { opacity: 1; transform: translateX(0); }
         }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.88); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes blurIn {
+            from { opacity: 0; filter: blur(12px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+        @keyframes blobMotion {
+            0%, 100% { opacity: 0.2; transform: translate(0, 0); }
+            50% { opacity: 0.35; transform: translate(0, -22px); }
+        }
         .animate-fade-in { animation: fadeInUp 0.8s ease both; }
         .animate-slide-left { animation: slideInLeft 0.8s ease both; }
         .animate-slide-right { animation: slideInRight 0.8s ease both; }
+        .animate-zoom-in { animation: zoomIn 0.8s ease both; }
+        .animate-blur-in { animation: blurIn 0.9s ease both; }
+        .blob-motion { animation: blobMotion 7s ease-in-out infinite; }
 
-        /* Aparecer progressivamente a cada seção (conforme o scroll) */
+        /* ===== Aparição progressiva conforme o scroll ===== */
+        /* As seções entram suavemente ao atingir determinada posição */
         .js section {
             opacity: 0;
             transform: translateY(28px);
@@ -671,12 +688,49 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Conteúdo interno: só anima depois que a seção fica visível */
+        .js section .animate-fade-in,
+        .js section .animate-slide-left,
+        .js section .animate-slide-right,
+        .js section .animate-zoom-in,
+        .js section .animate-blur-in {
+            animation: none;
+            opacity: 0;
+        }
+        .js section.is-visible .animate-fade-in { animation: fadeInUp 0.8s ease both; }
+        .js section.is-visible .animate-slide-left { animation: slideInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .js section.is-visible .animate-slide-right { animation: slideInRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .js section.is-visible .animate-zoom-in { animation: zoomIn 0.8s ease both; }
+        .js section.is-visible .animate-blur-in { animation: blurIn 0.9s ease both; }
+
+        /* Título de seção com sublinhado que se desenha */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.4rem;
+        }
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+        }
+        .js section.is-visible .section-title::after {
+            transform: scaleX(1);
+        }
 
         @media (prefers-reduced-motion: reduce) {
-            body, .animate-fade-in, .animate-slide-left, .animate-slide-right {
+            body, .animate-fade-in, .animate-slide-left, .animate-slide-right, .animate-zoom-in, .animate-blur-in {
                 animation: none !important;
             }
-            .animate-fade-in, .animate-slide-left, .animate-slide-right {
+            .animate-fade-in, .animate-slide-left, .animate-slide-right, .animate-zoom-in, .animate-blur-in {
                 opacity: 1 !important;
             }
             .js section {
@@ -884,35 +938,82 @@
         body.dark-mode .nav-link:hover { color: #4ade80; }
         body.dark-mode .nav-link:active { color: #22c55e; }
 
-        /* ===== Logo BrainCare: efeito ao clicar (recarregar) ===== */
-        #braincare-logo {
+        /* ===== Logo Here 4 Life: escreve ao carregar, apaga ao clicar (recarregar) ===== */
+        #here4life-logo {
+            position: relative;
             gap: 0 !important;
+            overflow: hidden;
         }
         .bc-logo-icon {
             display: inline-block;
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .bc-letter {
+        html.js #here4life-logo .bc-letter {
             display: inline-block;
+            opacity: 0;
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        #braincare-logo:hover .bc-letter,
-        #braincare-logo:hover .bc-logo-icon {
+        #here4life-logo .bc-gap {
+            display: inline-block;
+            width: 0.32em;
+        }
+        #here4life-logo .bc-sweep {
+            position: absolute;
+            top: 50%;
+            left: -36px;
+            width: 26px;
+            height: 26px;
+            transform: translateY(-50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        #here4life-logo .bc-sweep svg {
+            display: block;
+            width: 26px;
+            height: 26px;
+        }
+        #here4life-logo .bc-pencil { visibility: hidden; color: #b45309; }
+        #here4life-logo .bc-eraser { visibility: hidden; color: #f472b6; }
+
+        #here4life-logo:hover .bc-letter,
+        #here4life-logo:hover .bc-logo-icon {
             animation: bcLetterWave 0.5s ease;
         }
-        #braincare-logo.is-bursting .bc-letter,
-        #braincare-logo.is-bursting .bc-logo-icon {
-            animation: bcBurst 0.7s ease forwards;
-        }
-        body.dark-mode #braincare-logo { color: #4ade80; }
+
+        #here4life-logo.is-writing .bc-letter { animation: bcWriteIn 0.4s ease-out both; }
+        #here4life-logo.is-writing .bc-pencil { visibility: visible; }
+        #here4life-logo.is-writing .bc-sweep { animation: bcSweepWrite 1.2s ease-in-out forwards; }
+
+        #here4life-logo.is-erasing .bc-letter { animation: bcEraseOut 0.32s ease-in forwards; }
+        #here4life-logo.is-erasing .bc-pencil { visibility: hidden; }
+        #here4life-logo.is-erasing .bc-eraser { visibility: visible; }
+        #here4life-logo.is-erasing .bc-sweep { animation: bcSweepErase 1.05s ease-in-out forwards; }
+
+        body.dark-mode #here4life-logo { color: #4ade80; }
+
         @keyframes bcLetterWave {
             0% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-5px) rotate(-6deg); }
             100% { transform: translateY(0) rotate(0deg); }
         }
-        @keyframes bcBurst {
-            0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(0.2); opacity: 0; }
+        @keyframes bcWriteIn {
+            0% { opacity: 0; transform: translateY(8px) scale(0.5); }
+            60% { opacity: 1; }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes bcEraseOut {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-8px) scale(0.5); }
+        }
+        @keyframes bcSweepWrite {
+            0% { left: -36px; opacity: 1; }
+            82% { left: 100%; opacity: 1; }
+            100% { left: 102%; opacity: 0; }
+        }
+        @keyframes bcSweepErase {
+            0% { left: 104%; opacity: 1; }
+            82% { left: -36px; opacity: 1; }
+            100% { left: -38px; opacity: 0; }
         }
 
         /* ===== Foco nos campos do formulário (apenas anel verde) ===== */
@@ -1161,9 +1262,13 @@
 <header class="fixed w-full shadow-md bg-[#FEFDFB] z-50" id="header">
     <nav class="container mx-auto flex justify-between items-center py-4 px-4 md:px-0 gap-4">
         <div class="flex items-center gap-2 shrink-0">
-            <button type="button" id="braincare-logo" class="flex items-center text-green-800 text-2xl font-bold cursor-pointer select-none" onclick="braincareLogoClick(this)" title="Clique para recarregar" aria-label="Recarregar site">
+            <button type="button" id="here4life-logo" class="flex items-center text-green-800 text-2xl font-bold cursor-pointer select-none" onclick="here4lifeLogoClick(this)" title="Clique para recarregar" aria-label="Recarregar site">
                 <img src="ico.ico" alt="" class="w-8 h-8 object-contain bc-logo-icon">
-                <span class="bc-letter">B</span><span class="bc-letter">r</span><span class="bc-letter">a</span><span class="bc-letter">i</span><span class="bc-letter">n</span><span class="bc-letter">C</span><span class="bc-letter">a</span><span class="bc-letter">r</span><span class="bc-letter">e</span>
+                <span class="bc-letter">H</span><span class="bc-letter">e</span><span class="bc-letter">r</span><span class="bc-letter">e</span><span class="bc-gap"></span><span class="bc-letter">4</span><span class="bc-gap"></span><span class="bc-letter">L</span><span class="bc-letter">i</span><span class="bc-letter">f</span><span class="bc-letter">e</span>
+                <span class="bc-sweep" aria-hidden="true">
+                    <svg class="bc-pencil" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                    <svg class="bc-eraser" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
+                </span>
             </button>
         </div>
         
@@ -1223,22 +1328,22 @@
 
 <!-- Hero Section -->
 <section class="hero-bg pt-28 md:pt-40 pb-20 relative overflow-hidden">
-    <div class="absolute top-10 left-10 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-    <div class="absolute top-40 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+    <div class="absolute top-10 left-10 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 blob-motion"></div>
+    <div class="absolute top-40 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 blob-motion" style="animation-delay: 2s;"></div>
     
     <div class="container mx-auto flex flex-col items-center px-4 md:px-0 relative z-10">
         <div class="w-full max-w-4xl text-center animate-slide-left">
             <div class="mb-4 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
-                ✨ Bem-vindo à BrainCare
+                ✨ Bem-vindo à Here 4 Life
             </div>
             <h1 id="hero-title" onclick="heroTitleBurst(event)" class="hero-title text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight cursor-pointer select-none">
                 Saúde Mental <span class="hero-highlight">Corporativa</span>
             </h1>
             <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                Proteja a saúde mental dos seus colaboradores e cumpra as normas legais. BrainCare oferece profissionais especializados para cuidar da saúde mental no ambiente corporativo.
+                Proteja a saúde mental dos seus colaboradores e cumpra as normas legais. Here 4 Life oferece profissionais especializados para cuidar da saúde mental no ambiente corporativo.
             </p>
             <div class="mb-8">
-                <button class="audio-btn" onclick="toggleAudio('Proteja a saúde mental dos seus colaboradores e cumpra as normas legais. BrainCare oferece profissionais especializados para cuidar da saúde mental no ambiente corporativo.', this)" aria-label="Ouvir texto">
+                <button class="audio-btn" onclick="toggleAudio('Proteja a saúde mental dos seus colaboradores e cumpra as normas legais. Here 4 Life oferece profissionais especializados para cuidar da saúde mental no ambiente corporativo.', this)" aria-label="Ouvir texto">
                     <svg fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     <span class="audio-label">Ouvir</span>
                 </button>
@@ -1267,14 +1372,14 @@
     <div class="container mx-auto px-4 md:px-0">
         <div class="text-center mb-12 animate-fade-in">
             <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                <span class="section-title">Conheça a BrainCare em 1 Minuto</span>
+                <span class="section-title">Conheça a Here 4 Life em 1 Minuto</span>
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
                 Veja como ajudamos empresas a proteger a saúde mental dos colaboradores, em conformidade com as normas legais.
             </p>
         </div>
 
-        <div class="animate-fade-in" style="animation-delay: 0.15s;">
+        <div class="animate-zoom-in" style="animation-delay: 0.15s;">
             <div class="video-wrapper led-hover" data-video-id="SEU_VIDEO_ID">
                 <div class="video-poster">
                     <button class="video-play-btn led-hover" type="button" aria-label="Assistir ao vídeo">▶</button>
@@ -1311,7 +1416,7 @@
 
         <div class="grid md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto">
             <!-- Card 1: Normas Brasileiras -->
-            <div class="rounded-xl shadow-lg p-8 hover-scale led-hover animate-fade-in bg-gradient-to-br from-blue-50 to-blue-100" style="animation-delay: 0.1s;">
+            <div class="rounded-xl shadow-lg p-8 hover-scale led-hover animate-slide-left bg-gradient-to-br from-blue-50 to-blue-100" style="animation-delay: 0.1s;">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4">Normas Brasileiras</h3>
                 <ul class="text-gray-700 space-y-3">
                     <li class="flex items-start gap-3">
@@ -1330,7 +1435,7 @@
             </div>
 
             <!-- Card 2: Consequências do Não Cumprimento -->
-            <div class="rounded-xl shadow-lg p-8 hover-scale led-hover animate-fade-in bg-gradient-to-br from-red-50 to-red-100" style="animation-delay: 0.2s;">
+            <div class="rounded-xl shadow-lg p-8 hover-scale led-hover animate-slide-right bg-gradient-to-br from-red-50 to-red-100" style="animation-delay: 0.2s;">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4">Riscos e Consequências</h3>
                 <ul class="text-gray-700 space-y-3">
                     <li class="flex items-start gap-3">
@@ -1351,7 +1456,7 @@
 
         <!-- Blocos informativos coloridos (carrossel) -->
         <div class="mt-12">
-            <div class="carousel" data-carousel>
+            <div class="carousel animate-blur-in" data-carousel>
                 <div class="carousel-viewport">
                     <div class="carousel-track">
                         <div class="carousel-slide px-2 sm:px-12">
@@ -1395,10 +1500,10 @@
                 <span class="section-title">Quem Somos</span>
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
-                BrainCare é um prestador de serviços B2B especializado em proteger a saúde mental corporativa, ajudando empresas a atender normas legais e promover o bem-estar de seus colaboradores.
+                Here 4 Life é um prestador de serviços B2B especializado em proteger a saúde mental corporativa, ajudando empresas a atender normas legais e promover o bem-estar de seus colaboradores.
             </p>
             <div class="mt-4">
-                <button class="audio-btn" onclick="toggleAudio('BrainCare é um prestador de serviços B2B especializado em proteger a saúde mental corporativa, ajudando empresas a atender normas legais e promover o bem-estar de seus colaboradores.', this)" aria-label="Ouvir texto">
+                <button class="audio-btn" onclick="toggleAudio('Here 4 Life é um prestador de serviços B2B especializado em proteger a saúde mental corporativa, ajudando empresas a atender normas legais e promover o bem-estar de seus colaboradores.', this)" aria-label="Ouvir texto">
                     <svg fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     <span class="audio-label">Ouvir</span>
                 </button>
@@ -1406,7 +1511,7 @@
         </div>
         
         <div class="grid md:grid-cols-3 gap-12 mt-16">
-            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-slide-left" style="animation-delay: 0.1s;">
                 <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
@@ -1418,7 +1523,7 @@
                 </p>
             </div>
             
-            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-zoom-in" style="animation-delay: 0.2s;">
                 <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -1430,7 +1535,7 @@
                 </p>
             </div>
             
-            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-fade-in" style="animation-delay: 0.3s;">
+            <div class="feature-card led-hover rounded-xl shadow-lg p-8 animate-slide-right" style="animation-delay: 0.3s;">
                 <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m7 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -1542,13 +1647,13 @@
                 <span class="section-title">Soluções Corporativas</span>
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">
-                BrainCare é a solução especializada para empresas e organizações que precisam proteger a saúde mental de seus colaboradores.
+                Here 4 Life é a solução especializada para empresas e organizações que precisam proteger a saúde mental de seus colaboradores.
             </p>
         </div>
         
         <div class="grid md:grid-cols-2 gap-8 mt-16">
             <!-- Card: Empresas -->
-            <div class="hover-scale group led-hover rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-blue-200 animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="hover-scale group led-hover rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-blue-200 animate-slide-left" style="animation-delay: 0.1s;">
                 <div class="h-48 bg-gradient-to-br from-[#1e3a5f] to-[#16294a] flex items-center justify-center">
                     <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5.581m0 0H9m0 0h5.581M9 3h6m0 0h3m-3 0V7m0 0h-3"></path>
@@ -1584,7 +1689,7 @@
             </div>
             
             <!-- Card: ROI -->
-            <div class="hover-scale group led-hover rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-blue-100 animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="hover-scale group led-hover rounded-2xl shadow-lg overflow-hidden bg-[#F9F5F0] border-2 border-blue-100 animate-slide-right" style="animation-delay: 0.2s;">
                 <div class="h-48 bg-gradient-to-br from-[#2b4a73] to-[#1e3a5f] flex items-center justify-center">
                     <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6M3 7h8v8"></path>
@@ -1626,7 +1731,7 @@
 <section id="importancia" class="py-20 bg-gradient-to-b from-[#F9F5F0] to-[#F9F5F0]">
     <div class="container mx-auto px-4 md:px-0">
         <div class="md:grid md:grid-cols-2 md:gap-14 lg:gap-20 items-center">
-            <div class="text-center md:text-left mb-14 md:mb-0 animate-fade-in">
+            <div class="text-center md:text-left mb-14 md:mb-0 animate-slide-left">
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                     <span class="section-title">Por Que Importa</span>
                 </h2>
@@ -1642,7 +1747,7 @@
             </div>
 
             <!-- Estatísticas (carrossel) -->
-            <div class="animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="animate-slide-right" style="animation-delay: 0.1s;">
                 <div class="carousel" data-carousel>
                     <div class="carousel-viewport">
                         <div class="carousel-track">
@@ -1689,7 +1794,7 @@
         <!-- Depoimentos (carrossel) -->
         <div class="mt-20">
             <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">O Que Especialistas e Líderes Dizem</h3>
-            <div class="carousel max-w-4xl mx-auto animate-fade-in" style="animation-delay: 0.3s;" data-carousel>
+            <div class="carousel max-w-4xl mx-auto animate-blur-in" style="animation-delay: 0.3s;" data-carousel>
                 <div class="carousel-viewport">
                     <div class="carousel-track">
                         <div class="carousel-slide px-2 sm:px-12">
@@ -1761,7 +1866,7 @@
             </p>
         </div>
 
-        <div class="max-w-5xl mx-auto mb-10 animate-fade-in" style="animation-delay: 0.1s;">
+        <div class="max-w-5xl mx-auto mb-10 animate-slide-right" style="animation-delay: 0.1s;">
             <div class="rounded-3xl bg-[#1e3a5f] text-white p-6 md:p-8 shadow-2xl">
                 <div class="grid md:grid-cols-3 gap-6">
                     <div>
@@ -1774,7 +1879,7 @@
                     </div>
                     <div>
                         <p class="text-green-200 text-sm font-semibold mb-1">3. Solicite proposta</p>
-                        <p class="text-lg font-bold">Feche com a BrainCare e coloque a conformidade legal em prática.</p>
+                        <p class="text-lg font-bold">Feche com a Here 4 Life e coloque a conformidade legal em prática.</p>
                     </div>
                 </div>
             </div>
@@ -1782,7 +1887,7 @@
         
         <!-- Planos Corporativos -->
         <div class="max-w-5xl mx-auto">
-            <div class="grid md:grid-cols-3 gap-6 mb-8 animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="grid md:grid-cols-3 gap-6 mb-8 animate-slide-left" style="animation-delay: 0.2s;">
                 <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border-2 border-blue-200 hover-scale led-hover h-full flex flex-col" data-plan-card>
                     <div class="inline-flex items-center self-start mb-4 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">Entrada rápida</div>
                     <h4 class="font-bold text-gray-900 mb-2 text-xl">Pequenas Empresas</h4>
@@ -1805,7 +1910,7 @@
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700 mb-6">
                         <li>✓ Avaliações anônimas</li>
-                        <li>✓ 1 Profissional dedicado</li>
+                        
                         <li>✓ Relatórios mensais</li>
                         <li>✓ Conformidade legal</li>
                     </ul>
@@ -1839,7 +1944,7 @@
                     </div>
                     <ul class="space-y-3 text-sm text-gray-700 mb-6">
                         <li>✓ Avaliações anônimas</li>
-                        <li>✓ 2-3 Profissionais</li>
+                        
                         <li>✓ Relatórios semanais</li>
                         <li>✓ Workshops corporativos</li>
                         <li>✓ Plano customizado</li>
@@ -1865,7 +1970,7 @@
                     <div class="min-h-[3rem]"></div>
                     <ul class="space-y-3 text-sm text-gray-700 mb-6">
                         <li>✓ Solução white-label</li>
-                        <li>✓ Equipe dedicada</li>
+                        
                         <li>✓ Integração sistemas</li>
                         <li>✓ Consultoria estratégica</li>
                     </ul>
@@ -1898,19 +2003,19 @@
         <!-- Info Cards - Horizontal -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
             <!-- Email -->
-            <div class="text-center animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="text-center animate-slide-left" style="animation-delay: 0.1s;">
                 <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                     </svg>
                 </div>
                 <h3 class="font-bold text-gray-900 mb-1 text-sm">Email</h3>
-                <p class="text-gray-600 text-xs">contato@braincare.com.br</p>
-                <p class="text-gray-600 text-xs">empresas@braincare.com.br</p>
+                <p class="text-gray-600 text-xs">contato@here4life.com.br</p>
+                <p class="text-gray-600 text-xs">empresas@here4life.com.br</p>
             </div>
 
             <!-- Telefone -->
-            <div class="text-center animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="text-center animate-zoom-in" style="animation-delay: 0.2s;">
                 <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
@@ -1921,7 +2026,7 @@
             </div>
 
             <!-- Localização -->
-            <div class="text-center animate-fade-in" style="animation-delay: 0.3s;">
+            <div class="text-center animate-blur-in" style="animation-delay: 0.3s;">
                 <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -1933,7 +2038,7 @@
             </div>
 
             <!-- Redes Sociais -->
-            <div class="text-center animate-fade-in" style="animation-delay: 0.4s;">
+            <div class="text-center animate-slide-right" style="animation-delay: 0.4s;">
                 <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <svg class="w-7 h-7 text-green-600" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
@@ -1941,8 +2046,8 @@
                 </div>
                 <h3 class="font-bold text-gray-900 mb-1 text-sm">Redes</h3>
                 <ul class="space-y-0.5">
-                    <li><a href="https://www.instagram.com/braincareofc/" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-800 transition font-medium text-xs">Instagram</a></li>
-                    <li><a href="https://www.tiktok.com/@braincareofc?lang=pt-BR" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-800 transition font-medium text-xs">TikTok</a></li>
+                    <li><a href="https://www.instagram.com/here4lifeofc/" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-800 transition font-medium text-xs">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@here4lifeofc?lang=pt-BR" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-800 transition font-medium text-xs">TikTok</a></li>
                     <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-800 transition font-medium text-xs">LinkedIn</a></li>
                 </ul>
             </div>
@@ -1956,8 +2061,8 @@
         <div class="grid md:grid-cols-3 gap-8 mb-12">
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <img src="ico.ico" alt="BrainCare" class="w-8 h-8 object-contain">
-                    <span class="text-xl font-bold">BrainCare</span>
+                    <img src="ico.ico" alt="Here 4 Life" class="w-8 h-8 object-contain">
+                    <span class="text-xl font-bold">Here 4 Life</span>
                 </div>
                 <p class="text-gray-400">Proteção de saúde mental corporativa em conformidade com normas legais.</p>
             </div>
@@ -1975,15 +2080,15 @@
             <div>
                 <h4 class="font-bold mb-4">Redes</h4>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="https://www.instagram.com/braincareofc/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Instagram</a></li>
-                    <li><a href="https://www.tiktok.com/@braincareofc?lang=pt-BR" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">TikTok</a></li>
+                    <li><a href="https://www.instagram.com/here4lifeofc/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@here4lifeofc?lang=pt-BR" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">TikTok</a></li>
                     <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">LinkedIn</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="border-t border-gray-800 pt-8">
-            <p class="text-gray-400">© 2026 BrainCare. Todos os direitos reservados.</p>
+            <p class="text-gray-400">© 2026 Here 4 Life. Todos os direitos reservados.</p>
         </div>
     </div>
 </footer>
@@ -2075,7 +2180,7 @@
 </div>
 
 <!-- Chatbot Widget -->
-<button class="chatbot-button led-hover" onclick="toggleChatbot()" title="Chat BrainCare">
+<button class="chatbot-button led-hover" onclick="toggleChatbot()" title="Chat Here 4 Life">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
     </svg>
@@ -2091,7 +2196,7 @@
                     <circle cx="14.6" cy="11.5" r="1.15" fill="#1e3a5f"></circle>
                 </svg>
             </span>
-            <h3 class="font-semibold">BrainCare Assistente</h3>
+            <h3 class="font-semibold">Here 4 Life Assistente</h3>
         </div>
         <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
     </div>
@@ -2145,13 +2250,13 @@
 
         const intro = document.createElement('div');
         intro.className = 'bot-message';
-        intro.textContent = '💡 Posso te ajudar com perguntas sobre BrainCare, planos, conformidade e próximos passos. Comece com um destes prompts:';
+        intro.textContent = '💡 Posso te ajudar com perguntas sobre Here 4 Life, planos, conformidade e próximos passos. Comece com um destes prompts:';
 
         const suggestions = document.createElement('div');
         suggestions.className = 'chatbot-suggestions';
 
         const prompts = [
-            'O que é o BrainCare?',
+            'O que é o Here 4 Life?',
             'Quais são os planos?',
             'Como funciona a conformidade legal?'
         ];
@@ -2176,7 +2281,7 @@
         if (!content || content.dataset.initialized === 'true') return;
 
         content.innerHTML = '';
-        appendChatMessage('bot', 'Olá! 👋 Bem-vindo ao BrainCare. Sou seu assistente para dúvidas sobre saúde mental corporativa, planos e conformidade legal.');
+        appendChatMessage('bot', 'Olá! 👋 Bem-vindo ao Here 4 Life. Sou seu assistente para dúvidas sobre saúde mental corporativa, planos e conformidade legal.');
         appendPromptRecommendations();
         content.dataset.initialized = 'true';
     }
@@ -2202,7 +2307,7 @@
             planos: 'Temos planos mensais, anuais e corporativos.'
         };
 
-        appendChatMessage('bot', responses[option] || 'Posso te ajudar com BrainCare, planos e conformidade legal.');
+        appendChatMessage('bot', responses[option] || 'Posso te ajudar com Here 4 Life, planos e conformidade legal.');
     }
 
     function parseEmployeeCount(msg) {
@@ -2217,14 +2322,14 @@
         const lastTopic = chatbotState.lastTopic;
         const employeeCount = parseEmployeeCount(msg);
 
-        const braincarePattern = /^(o que e|oque e|quem e|o que significa|explique|como funciona)?\s*(braincare)?$/;
-        const braincareQuestion = /o que e|oque e|quem e|explica|significa|como funciona/.test(msg) && msg.includes('braincare');
+        const here4lifePattern = /^(o que e|oque e|quem e|o que significa|explique|como funciona)?\s*(here4life)?$/;
+        const here4lifeQuestion = /o que e|oque e|quem e|explica|significa|como funciona/.test(msg) && msg.includes('here4life');
 
-        if (braincarePattern.test(msg) || msg === 'braincare' || braincareQuestion) {
-            chatbotState.lastTopic = 'braincare';
+        if (here4lifePattern.test(msg) || msg === 'here4life' || here4lifeQuestion) {
+            chatbotState.lastTopic = 'here4life';
             return {
-                topic: 'braincare',
-                reply: 'BrainCare é uma solução B2B focada em saúde mental corporativa. A ideia é ajudar empresas a cuidar do bem-estar psicológico dos colaboradores, com apoio anônimo, orientação especializada e conformidade com normas legais.\n\nEm resumo: o site explica o serviço, mostra planos e orienta o usuário sobre os próximos passos.'
+                topic: 'here4life',
+                reply: 'Here 4 Life é uma solução B2B focada em saúde mental corporativa. A ideia é ajudar empresas a cuidar do bem-estar psicológico dos colaboradores, com apoio anônimo, orientação especializada e conformidade com normas legais.\n\nEm resumo: o site explica o serviço, mostra planos e orienta o usuário sobre os próximos passos.'
             };
         }
 
@@ -2288,7 +2393,7 @@
             chatbotState.lastTopic = 'contact';
             return {
                 topic: 'contact',
-                reply: 'Contato disponível no site:\n\n• contato@braincare.com.br\n• empresas@braincare.com.br\n• (11) 3000-0000\n\nSe a ideia for comercial, eu posso te guiar para o plano mais provável antes de você falar com o time.'
+                reply: 'Contato disponível no site:\n\n• contato@here4life.com.br\n• empresas@here4life.com.br\n• (11) 3000-0000\n\nSe a ideia for comercial, eu posso te guiar para o plano mais provável antes de você falar com o time.'
             };
         }
 
@@ -2296,20 +2401,20 @@
             chatbotState.lastTopic = 'mental-health';
             return {
                 topic: 'mental-health',
-                reply: 'No contexto corporativo, saúde mental envolve prevenção de sobrecarga, apoio psicológico, redução de afastamentos e cuidado contínuo com o ambiente de trabalho.\n\nNa BrainCare, a proposta é transformar isso em um processo simples para a empresa, sem expor os colaboradores.'
+                reply: 'No contexto corporativo, saúde mental envolve prevenção de sobrecarga, apoio psicológico, redução de afastamentos e cuidado contínuo com o ambiente de trabalho.\n\nNa Here 4 Life, a proposta é transformar isso em um processo simples para a empresa, sem expor os colaboradores.'
             };
         }
 
-        if (lastTopic === 'braincare' && /isso|explica melhor|mais detalhes|como assim/.test(msg)) {
+        if (lastTopic === 'here4life' && /isso|explica melhor|mais detalhes|como assim/.test(msg)) {
             return {
-                topic: 'braincare',
-                reply: 'BrainCare é o nome da solução e também o conceito do site: um serviço para ajudar empresas a cuidar da saúde mental corporativa com orientação, acompanhamento e conformidade legal.'
+                topic: 'here4life',
+                reply: 'Here 4 Life é o nome da solução e também o conceito do site: um serviço para ajudar empresas a cuidar da saúde mental corporativa com orientação, acompanhamento e conformidade legal.'
             };
         }
 
         return {
             topic: 'fallback',
-            reply: 'Entendi a sua pergunta, mas preciso de mais contexto para responder melhor.\n\nTente falar sobre BrainCare, preços, conformidade legal, serviços ou contato.'
+            reply: 'Entendi a sua pergunta, mas preciso de mais contexto para responder melhor.\n\nTente falar sobre Here 4 Life, preços, conformidade legal, serviços ou contato.'
         };
     }
 
@@ -2342,20 +2447,34 @@
         document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function braincareLogoClick(logo) {
-        if (logo.dataset.bursting === 'true') return;
-        logo.dataset.bursting = 'true';
-        const letters = logo.querySelectorAll('.bc-letter, .bc-logo-icon');
+    function here4lifeLogoClick(logo) {
+        if (logo.dataset.erasing === 'true') return;
+        logo.dataset.erasing = 'true';
+        const letters = logo.querySelectorAll('.bc-letter');
+        const n = letters.length;
         letters.forEach(function (l, i) {
-            const angle = (i / letters.length) * Math.PI * 2;
-            const dist = 45 + (i % 3) * 20;
-            l.style.setProperty('--tx', Math.round(Math.cos(angle) * dist) + 'px');
-            l.style.setProperty('--ty', Math.round(Math.sin(angle) * dist) + 'px');
-            l.style.setProperty('--rot', ((i % 2 === 0 ? 1 : -1) * (60 + i * 25)) + 'deg');
-            l.style.animationDelay = (i * 0.03) + 's';
+            l.style.animationDelay = ((n - 1 - i) * 80 + 150) + 'ms';
         });
-        logo.classList.add('is-bursting');
-        setTimeout(function () { location.reload(); }, 850);
+        logo.classList.add('is-erasing');
+        setTimeout(function () { location.reload(); }, 1150);
+    }
+
+    function initLogoWrite() {
+        const logo = document.getElementById('here4life-logo');
+        if (!logo) return;
+        const letters = logo.querySelectorAll('.bc-letter');
+        letters.forEach(function (l, i) {
+            l.style.animationDelay = (i * 80 + 150) + 'ms';
+        });
+        setTimeout(function () {
+            logo.classList.add('is-writing');
+        }, 180);
+        const total = 180 + (letters.length * 80 + 150) + 520;
+        setTimeout(function () {
+            if (logo.dataset.erasing === 'true') return;
+            logo.classList.remove('is-writing');
+            letters.forEach(function (l) { l.style.opacity = '1'; });
+        }, total);
     }
 
     function heroTitleBurst(event) {
@@ -2582,7 +2701,7 @@
         });
     }
 
-    /* ===== Aparecer progressivamente a cada seção (conforme o scroll, sempre) ===== */
+    /* ===== Aparecer progressivamente a cada seção (conforme o scroll) ===== */
     function initScrollReveal() {
         const sections = document.querySelectorAll('section');
         if (!sections.length) return;
@@ -2594,12 +2713,40 @@
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                } else {
-                    entry.target.classList.remove('is-visible');
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
         sections.forEach(function (s) { observer.observe(s); });
+    }
+
+    /* ===== Contadores animados das estatísticas (ao dar scroll) ===== */
+    function initStatCounters() {
+        const nums = document.querySelectorAll('.stat-number');
+        if (!nums.length || !('IntersectionObserver' in window)) return;
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                observer.unobserve(el);
+                const text = el.textContent.trim();
+                const match = text.match(/^([0-9]+)([\s\S]*)$/);
+                if (!match) return;
+                const target = parseInt(match[1], 10);
+                const suffix = match[2];
+                const duration = 1200;
+                const start = performance.now();
+                function tick(now) {
+                    const p = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = Math.round(target * eased) + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                    else el.textContent = target + suffix;
+                }
+                requestAnimationFrame(tick);
+            });
+        }, { threshold: 0.5 });
+        nums.forEach(function (n) { observer.observe(n); });
     }
 
     /* ===== Vídeo do Pitch (player só carrega ao clicar) ===== */
@@ -2622,7 +2769,7 @@
             if (!videoId || videoId === 'SEU_VIDEO_ID') return;
             const iframe = document.createElement('iframe');
             iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?rel=0&modestbranding=1&autoplay=1';
-            iframe.title = 'Pitch BrainCare';
+            iframe.title = 'Pitch Here 4 Life';
             iframe.loading = 'lazy';
             iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
             iframe.setAttribute('allowfullscreen', '');
@@ -2632,10 +2779,12 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+        initLogoWrite();
         initCarousels();
         initImageCarousel();
         initPlanToggles();
         initScrollReveal();
+        initStatCounters();
         initPitchVideo();
     });
 
